@@ -1,7 +1,10 @@
 # tubes_daspro
 Tugas Besar Daspro K07-6
 
-# GIT
+# Push ke GitHub
+Kalau ada perubahan penting, seperti mengubah code buatan orang lain atau semacamnya dikabarin lewat LINE ya
+
+# GIT 
 Step pakai Git -- Lakukan command git pada directory (folder) yang memuat git
 
 # Clone (git clone)

@@ -1,3 +1,4 @@
+import os
 def split_csv(s):
 # mengubah data yang dibaca dari file .csv kemudian mengembalikan sebuah array
 # yang berisi string dari pemisahan yang ditandai dengan semicolon (;)
@@ -120,6 +121,7 @@ def remove_candi(username, tipe):
         tipe.Neff -= 1
 
 def add_candi(username, racikan, tipe):
+# add_candi akan menambah data candi dengan nomor id terkecil yang bisa disisipi
     min = 0
     index = tipe.Neff
     for i in range(1,tipe.Neff):
@@ -137,6 +139,7 @@ def add_candi(username, racikan, tipe):
         idx += 1
 
 def delete_candi(id_candi, tipe):
+# delete_candi akan menghapus data candi dengan id = id_candi dari variabel global yang berisi data candi
     index = tipe.Neff
     for i in range (1,tipe.Neff):
         if id_candi == tipe.detail[i][0]:
@@ -146,9 +149,9 @@ def delete_candi(id_candi, tipe):
         for i in range (index,tipe.Neff):
             tipe.detail[i] = tipe.detail[i+1]
         tipe.Neff -= 1
-    return tipe
             
 def update_bahan(list, tipe):
+# meng-update bahan saat dipanggil sesuai isi dari list
     for i in range (1,tipe.Neff):
         tipe.detail[i][2] += list[i-1]
     return tipe

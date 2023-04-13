@@ -1,7 +1,7 @@
 import os
 def split(s,char):
 # mengubah data yang dibaca dari file .csv kemudian mengembalikan sebuah array
-# yang berisi string dari pemisahan yang ditandai dengan semicolon (;)
+# yang berisi string dari pemisahan yang ditandai dengan char
     sumofComma = 0
     for i in range (len(s)):
         if s[i] == char:

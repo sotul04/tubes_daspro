@@ -24,3 +24,10 @@ def search_role(input,tipe):
             found = tipe.detail[i][2]
             break
     return found
+
+def path_counter(path):
+    count = 1
+    for i in range(len(path)):
+        if path[i] == "/" and i != len(path)-1:
+            count += 1
+    return count

@@ -13,11 +13,12 @@ b_path = folder+"/bahan_bangunan.csv"
 user_data = user(read_user(u_path)[0],read_user(u_path)[1])
 candi_data = candi(read_candi(c_path)[0],read_candi(c_path)[1])
 bahan_data = bahan(read_bahan(b_path)[0],read_bahan(b_path)[1])
-print(user_data.detail[:user_data.Neff])
-print(candi_data.detail[:candi_data.Neff])
-print(bahan_data.detail[:bahan_data.Neff])
+#print(user_data.detail[:user_data.Neff])
+#print(candi_data.detail[:candi_data.Neff])
+#print(bahan_data.detail[:bahan_data.Neff])
 
-while True:
-    islogin = False
-    command = input()
-    pass
+#save(user_data, candi_data, bahan_data)
+#while True:
+#    islogin = False
+#    command = input()
+#    pass

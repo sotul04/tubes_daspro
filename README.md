@@ -29,5 +29,5 @@ Untuk menyimpan perubahan lakukan command "git add ." untuk menyimpan semua peru
 # Commit (git commit -m "pesan perubahan")
 Untuk menambah informasi jika ada perubahan pada file yang diedit dan sudah di-add
 
-# Pus (git push)
+# Push (git push)
 Menyimpan semua perubahan ke remote repo di github

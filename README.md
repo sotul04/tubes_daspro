@@ -26,7 +26,7 @@ Sebelum menyimpan perubahan lakukan command ini untuk mengecek perubahan di loca
 # Add (git add <nama file>)
 Untuk menyimpan perubahan lakukan command "git add ." untuk menyimpan semua perubahan atau "git add <"nama file">" untuk menyimpan file satu persatu
 
-# Commit (git commit -m "<message>")
+# Commit (git commit -m "pesan perubahan")
 Untuk menambah informasi jika ada perubahan pada file yang diedit dan sudah di-add
 
 # Pus (git push)

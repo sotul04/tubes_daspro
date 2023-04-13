@@ -5,7 +5,8 @@ Tugas Besar Daspro K07-6
 1. John - F01, F02, F03
 2. Reyndi - F06, F07, F11
 3. Erwan - F12, F15, F16
-5. Sutha - F04, F05, F08, F09, F10, F13(*), F19(*)
+5. Sutha - F04, F05, F08, F09, F10, F13*, F19*
+
    (*) Selesai
 
 

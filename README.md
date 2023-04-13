@@ -2,15 +2,29 @@
 Tugas Besar Daspro K07-6
 
 # GIT
-Step pakai Git
+Step pakai Git -- Lakukan command git pada directory (folder) yang memuat git
 
-# Clone
+# Clone (git clone)
 Saat pertama kali meng-clone repository
-1. Buat folder lokal di komputer masing-masing
+1. Buat folder local di komputer masing-masing
 2. Kemudian, buka COMMAND PROMPT (cmd) dengan current working directory sama dengan folder yang barusan dibuat
-3. Input command lines "git clone https://github.com/sotul04/tubes_daspro"
-4. Repo dari github sudah ter-clone ke lokal masing-masing
+3. Input command line "git clone https://github.com/sotul04/tubes_daspro", tanpa tanda apit ("")
+4. Repo dari github sudah ter-clone ke local masing-masing
 
-# Pull
-Saa
+# Pull (git pull)
+Saat ingin mengedit file di local masing-masing
+1. Input command line "git pull" untuk meng-update semua perubahan online pada repository yang ada di github
+2. Kalau tidak ada perbedaan repo github dengan local akan muncul pesan "Already up to date"
+3. Sebaliknya, semua perubahan akan didownload ke local masing-masing
 
+# Status (git status)
+Sebelum menyimpan perubahan lakukan command ini untuk mengecek perubahan di local masing-masing
+
+# Add (git add <nama file>)
+Untuk menyimpan perubahan lakukan command "git add ." untuk menyimpan semua perubahan atau "git add <"nama file">" untuk menyimpan file satu persatu
+
+# Commit (git commit -m "<message>")
+Untuk menambah informasi jika ada perubahan pada file yang diedit dan sudah di-add
+
+# Pus (git push)
+Menyimpan semua perubahan ke remote repo di github

@@ -2,11 +2,11 @@
 Tugas Besar Daspro K07-6
 
 # Pembagian Spesifikasi
-John - F01, F02, F03
-Reyndi - F06, F07, F11
-Erwan - F12, F15, F16
-Sutha - F04, F05, F08, F09, F10, F13(*), F19(*)
-(*) Selesai
+1. John - F01, F02, F03
+2. Reyndi - F06, F07, F11
+3. Erwan - F12, F15, F16
+5. Sutha - F04, F05, F08, F09, F10, F13(*), F19(*)
+   (*) Selesai
 
 
 # Push ke GitHub

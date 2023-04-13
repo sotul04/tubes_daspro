@@ -1,16 +1,16 @@
 import os
-def split_csv(s):
+def split(s,char):
 # mengubah data yang dibaca dari file .csv kemudian mengembalikan sebuah array
 # yang berisi string dari pemisahan yang ditandai dengan semicolon (;)
     sumofComma = 0
     for i in range (len(s)):
-        if s[i] == ';':
+        if s[i] == char:
             sumofComma += 1
     list_value = [0 for i in range (sumofComma+1)]
     index = 0
     temp = ''
     for j in range (len(s)):
-        if s[j] == ';' or j == len(s)-1:
+        if s[j] == char or j == len(s)-1:
             if j == len(s)-1:
                 if s[j] != "\n":
                     temp += s[j]
@@ -29,7 +29,7 @@ def read_user(path):
     with open(path, "r") as file:
         index = 0
         for line in file:
-            temp[index] = split_csv(line)
+            temp[index] = split(line,";")
             index += 1
     return index,temp
 
@@ -41,7 +41,7 @@ def read_candi(path):
     with open(path, "r") as file:
         index = 0
         for line in file:
-            tent = split_csv(line)
+            tent = split(line,";")
             for i in range (5):
                 if i != 1 and index != 0:
                     tent[i] = int(tent[i])
@@ -57,7 +57,7 @@ def read_bahan(path):
     with open(path, "r") as file:
         index = 0
         for line in file:
-            tent = split_csv(line)
+            tent = split(line,";")
             if index != 0:
                 tent[2] = int(tent[2])
             temp[index] = tent

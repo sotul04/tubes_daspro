@@ -14,7 +14,7 @@ b_path = folder+"/bahan_bangunan.csv"
 user_data = user(read_user(u_path)[0],read_user(u_path)[1])
 candi_data = candi(read_candi(c_path)[0],read_candi(c_path)[1])
 bahan_data = bahan(read_bahan(b_path)[0],read_bahan(b_path)[1])
-# memuat numbers {variabel yang menyimpan angka acak selama permainan}
+# memuat numbers {variabel yang menyimpan angka random selama permainan}
 if candi_data.Neff > 1:
     numbers = number_colc(1, candi_data.detail[candi_data.Neff-1][4])
 else:

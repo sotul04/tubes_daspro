@@ -2,10 +2,10 @@
 Tugas Besar Daspro K07-6
 
 # Pembagian Spesifikasi
-1. John - F01, F02, F03
+1. John - F01* - Suthasoma (udah dikerjain bang tinggal edit dikit), F02* - Suthasoma, F03
 2. Reyndi - F06, F07, F11
-3. Erwan - F12, F15, F16
-5. Sutha - F04, F05, F08*, F09*, F10*, F13*, F14*
+3. Erwan - F12, F15, F16* - Suthasoma (Udah dikerjain bg)
+5. Sutha - F04*, F05*, F08*, F09*, F10*, F13*, F14*
 
    (*) Selesai
 

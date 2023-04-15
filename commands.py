@@ -101,7 +101,63 @@ def batch_bangun(user,candi,bahan,numbers):
                     kurang[i] = 0
             print(f"Bangun gagal. Kurang {kurang[0]} pasir, {kurang[1]} batu, {kurang[2]} air.")
             
+def laporanjin(user,candi,bahan):
+    total_jin = count_jin(user)[0]
+    jin_kumpul = count_jin(user)[1]
+    jin_bangun = count_jin(user)[2]
+    jlh_pembuat = list_candi(user, candi)[0]
+    candi_list = list_candi(user, candi)[1]
+    if jlh_pembuat == 0:
+        jin_termalas = '-'
+        jin_terajin = '-'
+    else:
+        count = 1
+        jumlah = candi_list[0][1]
+        for j in range (1,jlh_pembuat):
+            if jumlah < candi_list[j][1]:
+                jumlah = candi_list[j][1]
+                count = 1
+            elif jumlah == candi_list[j][1]:
+                count += 1
+        list_rajin = [0 for i in range(count)]
+        index = 0
+        for i in range(jlh_pembuat):
+            if candi_list[i][1] == jumlah:
+                list_rajin[index] = candi_list[i][0]
+                index += 1
+        urut_abjad(list_rajin, count)
+        jin_terajin = list_rajin[0]
+        if count == jlh_pembuat:
+            jin_termalas = list_rajin[count-1]
+        else:
+            count = 1
+            jumlah_malas = candi_list[0][1]
+            for j in range (1,jlh_pembuat):
+                if jumlah_malas > candi_list[j][1]:
+                    jumlah_malas = candi_list[j][1]
+                    count = 1
+                elif jumlah_malas == candi_list[j][1]:
+                    count += 1
+            list_malas = [0 for i in range(count)]
+            index = 0
+            for j in range(jlh_pembuat):
+                if candi_list[j][1] == jumlah_malas:
+                    list_malas[index] = candi_list[j][0]
+                    index += 1
+            urut_abjad(list_malas, count)
+            jin_termalas = list_malas[count-1]
+        if jin_bangun == 0:
+            jin_termalas = "-"
+    print(f"\n> Total Jin: {total_jin}")
+    print(f"> Total Jin Pengumpul: {jin_kumpul}")
+    print(f"> Total Jin Pembangun: {jin_kumpul}")
+    print(f"> Jin Terajin: {jin_terajin}")
+    print(f"> Jin Termalas: {jin_termalas}")
+    print(f"> Jumlah Pasir: {bahan.detail[1][2]} unit")
+    print(f"> Jumlah Pasir: {bahan.detail[2][2]} unit")
+    print(f"> Jumlah Pasir: {bahan.detail[3][2]} unit")
 
 
-
+            
+        
 

@@ -100,8 +100,10 @@ def batch_bangun(user,candi,bahan,numbers):
                 if kurang[i] < 0:
                     kurang[i] = 0
             print(f"Bangun gagal. Kurang {kurang[0]} pasir, {kurang[1]} batu, {kurang[2]} air.")
-            
+
+# F09 - Ambil Laporan Jin
 def laporanjin(user,candi,bahan):
+# melakukan prosedur pengambilan laporan jin
     total_jin = count_jin(user)[0]
     jin_kumpul = count_jin(user)[1]
     jin_bangun = count_jin(user)[2]
@@ -155,9 +157,57 @@ def laporanjin(user,candi,bahan):
     print(f"> Jin Termalas: {jin_termalas}")
     print(f"> Jumlah Pasir: {bahan.detail[1][2]} unit")
     print(f"> Jumlah Pasir: {bahan.detail[2][2]} unit")
-    print(f"> Jumlah Pasir: {bahan.detail[3][2]} unit")
+    print(f"> Jumlah Pasir: {bahan.detail[3][2]} unit\n")
 
 
-            
-        
+# F10 - Ambil Laporan Candi
+def laporancandi(candi):
+# Melakukan prosedur F10 
+    total_candi = candi.Neff-1
+    total_bahan = [0,0,0]
+    candi_detail = [[0,0] for i in range (total_candi)]
+    for i in range(1,candi.Neff):
+        for j in range (3):
+            total_bahan[j] += candi.detail[i][j+2]
+        cond = candi.detail[i]
+        candi_detail[i-1] = [cond[0],(cond[2]*10000+cond[3]*15000+cond[4]*7500)]
+    if total_candi == 0:
+        id_mahal = "-"
+        id_murah = "-"
+    else:
+        for i in range (1,total_candi):
+            min = candi_detail[i][1]
+            idx = i-1
+            while idx >= 1 and min < candi_detail[idx][1]:
+                candi_detail[idx+1],candi_detail[idx] = candi_detail[idx],candi_detail[idx+1]
+                idx -= 1
+        if total_candi == 1:
+            id_mahal = str(candi_detail[0][0])+" ("+ribuan_parse(candi_detail[0][1])+")"
+            id_murah = str(candi_detail[0][0])+" "+ribuan_parse(candi_detail[0][1])
+        else:
+            id_mahal = str(candi_detail[total_candi-1][0])+" ("+ribuan_parse(candi_detail[total_candi-1][1])+")"
+            id_murah = str(candi_detail[0][0])+" ("+ribuan_parse(candi_detail[0][1])+")"
+    print(f"\n> Total Candi: {total_candi}")
+    print(f"> Total Pasir yang digunakan: {total_bahan[0]}")
+    print(f"> Total Batu yang digunakan: {total_bahan[1]}")
+    print(f"> Total Air yang digunakan: {total_bahan[2]}")
+    print(f"> ID Candi Termahal: {id_mahal}")
+    print(f"> ID Candi Termurah: {id_murah}\n")    
 
+# F04 - Hilangkan Jin
+def hapusjin(user,candi):
+    username = input("Masukkan username jin : ")
+    cond = search_log(username, user)
+    if cond == False:
+        print("\nTidak ada jin dengan username tersebut.\n")
+    else:
+        hapus = input(f"Apakah anda yakin ingin menghapus jin dengan username {username} (Y/N)? ")
+        while hapus != "Y" and hapus != "N":
+            print("\nInput anda salah silahkan input ulang.")
+            hapus = input(f"Apakah anda yakin ingin menghapus jin dengan username {username} (Y/N)? ")
+        if hapus == "Y":
+            print("\nJin telah dihapus dari alam gaib.\n")
+            remove_jin(username, user)
+            remove_candi(username, candi)
+        else:
+            print("\nJin batal dihapus dari alam gaib.\n")

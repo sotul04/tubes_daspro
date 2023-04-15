@@ -30,6 +30,7 @@ class bahan:
         self.Neff = Neff
         self.detail = detail
         self.length = 3
+        
 
 # tipe bentukan yang menyimpan data log angka hasil RANDOMISASI
 class number_colc:

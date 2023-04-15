@@ -49,8 +49,8 @@ def acakbangun(tipe,neff):
 def acakkumpul(tipe,neff):
 # fungsi ini akan mengubah data ANGKA ACAK saat dipanggil
     a = 11103515245
-    c = 12342
-    m = 2**31
+    c = 12347
+    m = 2**30
     temp = [0 for i in range(tipe.Neff+neff)]
     for i in range(tipe.Neff):
         temp[i] = tipe.array[i]
@@ -68,7 +68,19 @@ def acak_bangun(tipe):
     return result
 def acak_kumpul(tipe):
 # mengembalikan sebuah integer yang digunakan pada spesifikasi F07 dan F08
-    acakbangun(tipe,1)
     acakkumpul(tipe,1)
     result = tipe.array[tipe.Neff-1]%6
     return result
+
+def list_jin(role,user):
+    count = 0
+    for i in range (1,user.Neff):
+        if user.detail[i][2] == role:
+            count += 1
+    temp = [0 for i in range(count)]
+    index = 0
+    for i in range (1,user.Neff):
+        if user.detail[i][2] == role:
+            temp[index] = user.detail[i][0]
+            index += 1
+    return count,temp

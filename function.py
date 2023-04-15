@@ -1,7 +1,7 @@
 def search_log(input,user):
 # return seluruh data pada array yang memuat username yang dicari
     found = False
-    for i in range(1,user.Neff+1):
+    for i in range(1,user.Neff):
         if input == user.detail[i][0]:
             found = user.detail[i]
             break
@@ -10,7 +10,7 @@ def search_log(input,user):
 def search_position(input,user):
 # return integer -> posisi dari username yang dicari pada detail data user
     found = 0
-    for i in range(1,user.Neff+1):
+    for i in range(1,user.Neff):
         if input == user.detail[i][0]:
             found = i
             break
@@ -19,7 +19,7 @@ def search_position(input,user):
 def search_role(input,user):
 # return string -> role dari username yang dicari
     found = False
-    for i in range(1,user.Neff+1):
+    for i in range(1,user.Neff):
         if input == user.detail[i][0]:
             found = user.detail[i][2]
             break

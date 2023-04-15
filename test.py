@@ -22,3 +22,4 @@ candi_data = bahan(read_candi("data_eksternal/candi.csv")[0],read_candi("data_ek
 #print(count_jin(user_data))
 #print(a)
 laporanjin(user_data, candi_data, bahan_data)
+laporancandi(candi_data)

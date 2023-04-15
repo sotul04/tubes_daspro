@@ -17,10 +17,12 @@ def load(folder):
         print("Usage: "+"\x1B[3m" + "python main.py" + "\x1B[0m" + " <nama_folder>")
         exit()
     elif os.path.isdir(foldr):
+        print("Loading...")
+        sleep(2)
         print("\nSelamat datang di program \"Manajerial Candi\"")
         folder[0] = foldr
     else:
-        print(f"\nFolder \"{folder}\" tidak ditemukan.")
+        print(f"\nFolder \"{foldr}\" tidak ditemukan.")
         exit()
 #F14
 def save(user,candi,bahan):
@@ -63,7 +65,7 @@ def batch_kumpul(user,bahan,numbers):
             racikan[0] += pasir
             racikan[1] += batu
             racikan[2] += air
-        print(f"Jin menemukan total {racikan[0]} pasir, {racikan[1]} batu, {racikan[2]} air.")
+        print(f"Jin menemukan total {racikan[0]} pasir, {racikan[1]} batu, {racikan[2]} air.\n")
         update_bahan(racikan, bahan)
 
 def batch_bangun(user,candi,bahan,numbers):
@@ -92,14 +94,14 @@ def batch_bangun(user,candi,bahan,numbers):
             update_bahan([-bahan_total[0],-bahan_total[1],-bahan_total[2]], bahan)
             for i in range(data[0]):
                 add_candi(temp[i][0], [temp[i][1],temp[i][2],temp[i][3]], candi)
-            print(f"Jin berhasil membangun total {data[0]} candi.")
+            print(f"Jin berhasil membangun total {data[0]} candi.\n")
         else:
             kurang = [0,0,0]
             for i in range (3):
                 kurang[i] = bahan_total[i]-bahan.detail[i+1][2]
                 if kurang[i] < 0:
                     kurang[i] = 0
-            print(f"Bangun gagal. Kurang {kurang[0]} pasir, {kurang[1]} batu, {kurang[2]} air.")
+            print(f"Bangun gagal. Kurang {kurang[0]} pasir, {kurang[1]} batu, {kurang[2]} air.\n")
 
 # F09 - Ambil Laporan Jin
 def laporanjin(user,candi,bahan):
@@ -148,8 +150,8 @@ def laporanjin(user,candi,bahan):
                     index += 1
             urut_abjad(list_malas, count)
             jin_termalas = list_malas[count-1]
-        if jin_bangun == 0:
-            jin_termalas = "-"
+        #if jin_bangun == 0:
+        #    jin_termalas = "-"
     print(f"\n> Total Jin: {total_jin}")
     print(f"> Total Jin Pengumpul: {jin_kumpul}")
     print(f"> Total Jin Pembangun: {jin_kumpul}")
@@ -196,18 +198,142 @@ def laporancandi(candi):
 
 # F04 - Hilangkan Jin
 def hapusjin(user,candi):
+# Melakukan prosedur hapusjin //Akses: Bandung Bondowoso   
     username = input("Masukkan username jin : ")
     cond = search_log(username, user)
     if cond == False:
         print("\nTidak ada jin dengan username tersebut.\n")
     else:
-        hapus = input(f"Apakah anda yakin ingin menghapus jin dengan username {username} (Y/N)? ")
-        while hapus != "Y" and hapus != "N":
-            print("\nInput anda salah silahkan input ulang.")
-            hapus = input(f"Apakah anda yakin ingin menghapus jin dengan username {username} (Y/N)? ")
-        if hapus == "Y":
-            print("\nJin telah dihapus dari alam gaib.\n")
-            remove_jin(username, user)
-            remove_candi(username, candi)
+        if cond[2] != "jin_pengumpul" and cond[2] != "jin_pembangun":
+            print("\nTidak ada jin dengan username tersebut.\n")
         else:
-            print("\nJin batal dihapus dari alam gaib.\n")
+            hapus = input(f"Apakah anda yakin ingin menghapus jin dengan username {username} (Y/N)? ")
+            while hapus != "Y" and hapus != "N":
+                print("\nInput anda salah silahkan input ulang.")
+                hapus = input(f"Apakah anda yakin ingin menghapus jin dengan username {username} (Y/N)? ")
+            if hapus == "Y":
+                print("\nJin telah dihapus dari alam gaib.\n")
+                remove_jin(username, user)
+                remove_candi(username, candi)
+            else:
+                print("\nJin batal dihapus dari alam gaib.\n")
+
+# F05 - Ubah Tipe Jin
+def ubahjin(user):
+# melakukan prosedur ubahjin
+    username = input("Masukkan username jin : ")
+    cond = search_log(username, user)
+    if cond == False:
+        print("\nTidak ada jin dengan username tersebut.\n")
+    else:
+        if cond[2] != "jin_pengumpul" and cond[2] != "jin_pembangun":
+            print("\nTidak ada jin dengan username tersebut.\n")
+        else:
+            tipe_jin = "Pengumpul" if cond[2] == "jin_pengumpul" else "Pembangun"
+            ubah_ke = "Pengumpul" if cond[2] != "jin_pengumpul" else "Pembangun"
+            ubah = input(f"Jin ini bertipe \"{tipe_jin}\". Yakin ingin mengubah ke tipe \"{ubah_ke}\" (Y/N)? ")
+            while ubah != "Y" and ubah != "N":
+                print("\nInput anda salah silahkan input ulang.")
+                ubah = input(f"Jin ini bertipe \"{tipe_jin}\". Yakin ingin mengubah ke tipe \"{ubah_ke}\" (Y/N)? ")
+            if ubah == "Y":
+                print("\nJin telah berhasil diubah.\n")
+                idx = search_position(username, user)
+                user.detail[idx][2] = "jin_pengumpul" if ubah_ke != "Pembangun" else "jin_pembangun"
+            else:
+                print("\nJin batal diubah.\n")
+
+
+
+# LOGIN HARUS DIBUAT PALING AKHIR, LANJUTKAN CODE DI ATAS BAGIAN INI
+# F01 - Login
+def login(user,candi,bahan,numbers,role):
+    username = input("Username: ")
+    password = input("Password: ")
+    cond = search_log(username, user)
+    if cond != False:
+        if password == cond[1]:
+            print(f"\nSelamat datang, {cond[0]}!")
+            print("Masukkan command \"help\" untuk daftar command yang dapat kamu panggil.")
+            role = cond[2]
+            while True:
+                pilihan = input(">>> ")
+                if pilihan == "save":
+                    save(user, candi, bahan)
+                elif pilihan == "logout":
+                    break
+                elif pilihan == "help":
+                    if role == "bandung_bondowoso":
+                        pass
+                    elif role == "roro_jonggrang":
+                        pass
+                    elif role == "jin_pengumpul":
+                        pass
+                    else:
+                        pass
+                elif pilihan == "exit":
+                    simpan = input("Apakah Anda mau melakukan penyimpanan file yang sudah diubah? (y/n) ")
+                    while simpan != "y" and simpan != "Y" and simpan != "n" and simpan != "N":
+                        simpan = input("Apakah Anda mau melakukan penyimpanan file yang sudah diubah? (y/n) ")
+                    if simpan == "y" or simpan == "Y":
+                        save(user, candi, bahan)
+                    exit()
+                elif pilihan == "login":
+                    print("Login gagal!")
+                    print(f"Anda telah login dengan username {username}, silahkan lakukan \"logout\" sebelum melakukan login kembali.\n")
+                elif pilihan == "summonjin":
+                    if role == "bandung_bondowoso":
+                        pass
+                    else:
+                        print("Summon Jin hanya dapat diakses oleh akun Bandung Bodowoso.")
+                elif pilihan == "hapusjin":
+                    if role == "bandung_bondowoso":
+                        hapusjin(user, candi)
+                    else:
+                        print("Hapus Jin hanya dapat diakses oleh akun Bandung Bondowoso.")
+                elif pilihan == "bangun":
+                    if role == "jin_pembangun":
+                        pass
+                    else:
+                        print("Bangun hanya dapat diakses oleh akun Jin Pembangun.")
+                elif pilihan == "kumpul":
+                    if role == "jin_pembangun":
+                        pass
+                    else:
+                        print("Kumpul hanya dapat diakses oleh akun Jin Pengumpul.")
+                elif pilihan == "batchkumpul":
+                    if role == "bandung_bondowoso":
+                        batch_kumpul(user, bahan, numbers)
+                    else:
+                        print("Batch Kumpul hanya dapat diakses oleh akun Bandung Bondowoso.")
+                elif pilihan == "batchbangun":
+                    if role == "bandung_bondowoso":
+                        batch_bangun(user, candi, bahan, numbers)
+                    else:
+                        print("Batch Bangun hanya dapat diakses oleh akun Bandung Bondowoso.")
+                elif pilihan == "laporanjin":
+                    if role == "bandung_bondowoso":
+                        laporanjin(user, candi, bahan)
+                    else:
+                        print("Laporan jin hanya dapat diakses oleh akun Bandung Bondowoso.")
+                elif pilihan == "laporancandi":
+                    if role == "bandung_bondowoso":
+                        laporancandi(candi)
+                    else:
+                        print("Laporan candi hanya dapat diakses oleh akun Bandung Bondowoso.")
+                elif pilihan == "hancurkancandi":
+                    if role == "roro_jonggrang":
+                        pass
+                    else:
+                        print("Hancurkan Candi hanya dapat diakses oleh akun Roro Jonggrang.")
+                elif pilihan == "ayamberkokok":
+                    if role == "roro_jonggrang":
+                        pass
+                    else:
+                        print("Ayam Berkokok hanya dapat diakses oleh akun Roro Jonggrang.")
+                else:
+                    print("Command tidak tersedia. Silahkan input command \"help\" untuk mengecek akses anda.\n")   
+            role = None
+        else:
+            print("\nPassword salah!\n")
+    else:
+        print("\nUsername tidak terdaftar!\n")

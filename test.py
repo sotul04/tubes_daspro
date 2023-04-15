@@ -23,3 +23,7 @@ candi_data = bahan(read_candi("data_eksternal/candi.csv")[0],read_candi("data_ek
 #print(a)
 laporanjin(user_data, candi_data, bahan_data)
 laporancandi(candi_data)
+hapusjin(user_data, candi_data)
+print(user_data.detail[1:user_data.Neff])
+ubahjin(user_data)
+print(user_data.detail[1:user_data.Neff])

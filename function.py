@@ -73,6 +73,7 @@ def acak_kumpul(tipe):
     return result
 
 def list_jin(role,user):
+# mengembalikan list yang berisi username jini bertipe role
     count = 0
     for i in range (1,user.Neff):
         if user.detail[i][2] == role:
@@ -84,3 +85,47 @@ def list_jin(role,user):
             temp[index] = user.detail[i][0]
             index += 1
     return count,temp
+
+def count_jin(user):
+# menghitung total jin, jumlah jin pengumpul, dan jin pembangun
+    total_jin = user.Neff-3
+    jin_kumpul = 0
+    for i in range (3,user.Neff):
+        if user.detail[i][2] == "jin_pengumpul":
+            jin_kumpul += 1
+    jin_bangun = total_jin - jin_kumpul
+    return total_jin,jin_kumpul,jin_bangun
+
+def list_candi(user,candi):
+# mengembalikan jumlah permbuat candi pada data candi dan list yang berisi nama pembuat dan jumlah candinya
+    count = count_jin(user)[2]
+    temp = [[0,0] for i in range (count)]
+    index = 0
+    for i in range (3,user.Neff):
+        if user.detail[i][2] == "jin_pembangun":
+            temp[index][0] = user.detail[i][0]
+            index += 1
+    for i in range (1,candi.Neff):
+        found = False
+        for j in range(count):
+            if candi.detail[i][1] == temp[j][0]:
+                found = True
+                temp[j][1] += 1
+                break
+        if not found:
+            tent = [[0,0] for j in range (count +1)]
+            count += 1
+            for j in range(count-1):
+                tent[j] = temp[j]
+            temp = tent
+            temp[count-1] = [candi.detail[i][1],1]
+    return count,temp
+
+def urut_abjad(list,count):
+# mengurutkan list berisi string secara menaik dengan 
+    for i in range(1,count):
+        min = list[i]
+        idx = i-1
+        while idx >= 0 and min < list[idx]:
+            list[idx+1],list[idx] = list[idx],list[idx+1]
+            idx -= 1

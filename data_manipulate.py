@@ -122,21 +122,22 @@ def remove_candi(username, tipe):
 
 def add_candi(username, racikan, tipe):
 # add_candi akan menambah data candi dengan nomor id terkecil yang bisa disisipi
-    min = 0
-    index = tipe.Neff
-    for i in range(1,tipe.Neff):
-        if min < tipe.detail[i][0]:
-            index = i
-            break
-        else:
-            min += 1
-    temp = [tipe.detail[i] for i in range (index, tipe.Neff)]
-    tipe.detail[index] = [min,username,racikan[0],racikan[1],racikan[2]]
-    tipe.Neff += 1
-    idx = 0
-    for i in range(index+1,tipe.Neff):
-        tipe.detail[i] = temp[idx]
-        idx += 1
+    if tipe.Neff < 101:
+        min = 0
+        index = tipe.Neff
+        for i in range(1,tipe.Neff):
+            if min < tipe.detail[i][0]:
+                index = i
+                break
+            else:
+                min += 1
+        temp = [tipe.detail[i] for i in range (index, tipe.Neff)]
+        tipe.detail[index] = [min,username,racikan[0],racikan[1],racikan[2]]
+        tipe.Neff += 1
+        idx = 0
+        for i in range(index+1,tipe.Neff):
+            tipe.detail[i] = temp[idx]
+            idx += 1
 
 def delete_candi(id_candi, tipe):
 # delete_candi akan menghapus data candi dengan id = id_candi dari variabel global yang berisi data candi
@@ -155,3 +156,4 @@ def update_bahan(list, tipe):
     for i in range (1,tipe.Neff):
         tipe.detail[i][2] += list[i-1]
     return tipe
+

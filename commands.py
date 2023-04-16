@@ -347,6 +347,7 @@ def ayamberkokok(candi:Type[candi])->None:
         print("Yah, Bandung Bondowoso memenangkan permainan!\n")
     else:
         print("Selamat, Roro Jonggrang memenangkan permainan!\n*Bandung Bondowoso angry noise*\nRoro Jonggrang dikutuk menjadi candi.\n")
+    exit()
 
 # F15 - Help
 def help()->None:
@@ -357,15 +358,16 @@ def help()->None:
 
 def help_bandung()->None:
     print("=========== HELP ===========")
-    print("1. logout\n   Untuk keluar dari akun yang digunakan sekarang")
-    print("2. summonjin\n   Untuk memanggil jin")
-    print("3. hapusjin\n   Untuk menghapus jin sekaligus candi yang dibuatnya")
-    print("4. batchkumpul\n   Untuk mengerahkan semua Jin Pengumpul mengumpulkan bahan-bahan")
-    print("5. batchbangun\n   Untuk mengerahkan semua Jin Pembangun membangun candi")
-    print("6. laporanjin\n   Untuk melihat semua data pekerjaan dari semua jin")
-    print("7. laporancandi\n   Untuk melihat semua data candi")
-    print("8. save\n   Untuk menyimpan perubahan data selama permainan")
-    print("9. exit\n   Untuk keluar dari program dan kembali ke terminal\n")
+    print("1.  logout\n    Untuk keluar dari akun yang digunakan sekarang")
+    print("2.  summonjin\n    Untuk memanggil jin")
+    print("3.  hapusjin\n    Untuk menghapus jin sekaligus candi yang dibuatnya")
+    print("4.  ubahjib\n    Untuk menukar tipe jin")
+    print("5.  batchkumpul\n   Untuk mengerahkan semua Jin Pengumpul mengumpulkan bahan-bahan")
+    print("6.  batchbangun\n   Untuk mengerahkan semua Jin Pembangun membangun candi")
+    print("7.  laporanjin\n   Untuk melihat semua data pekerjaan dari semua jin")
+    print("8.  laporancandi\n   Untuk melihat semua data candi")
+    print("9.  save\n   Untuk menyimpan perubahan data selama permainan")
+    print("10. exit\n   Untuk keluar dari program dan kembali ke terminal\n")
 
 def help_roro()->None:
     print("=========== HELP ===========")
@@ -435,13 +437,18 @@ def login(user:Type[user],candi:Type[candi],bahan:Type[bahan],numbers:Type[numbe
                         hapusjin(user, candi)
                     else:
                         print("Hapus Jin hanya dapat diakses oleh akun Bandung Bondowoso.\n")
+                elif pilihan == "ubahjin":
+                    if role == "bandung_bondowoso":
+                        ubahjin(user)
+                    else:
+                        print("Ubah Jin hanya dapat diakses oleh akun Bandung Bondowoso.\n")
                 elif pilihan == "bangun":
                     if role == "jin_pembangun":
                         bangun(username, candi, bahan, numbers)
                     else:
                         print("Bangun hanya dapat diakses oleh akun Jin Pembangun.\n")
                 elif pilihan == "kumpul":
-                    if role == "jin_pembangun":
+                    if role == "jin_pengumpul":
                         kumpul(bahan, numbers)
                     else:
                         print("Kumpul hanya dapat diakses oleh akun Jin Pengumpul.\n")

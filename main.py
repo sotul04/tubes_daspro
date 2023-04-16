@@ -3,7 +3,7 @@ from data_manipulate import *
 from function import *
 from data_type import *
 
-folder = [0]
+folder = ["kosong"]
 # [F13] melakukan load {memanggil file eksternal}
 load(folder)
 folder = folder[0]

@@ -245,12 +245,44 @@ def ubahjin(user):
 # F03 - Summon Jin
 def summonjin(user):
 # menjalankan prosedur summon jin
-    print("Jenis jin yang dapat dipanggil:")
-    print(" (1) Pengumpul - Bertugas mengumpulkan bahan bangunan")
-    print(" (2) Pembangun - Bertugas membangun candi\n")
-    jenis = int(input(""))
-
-
+    if user.Neff < 103:
+        print("Jenis jin yang dapat dipanggil:")
+        print(" (1) Pengumpul - Bertugas mengumpulkan bahan bangunan")
+        print(" (2) Pembangun - Bertugas membangun candi\n")
+        jenis = int(input("Masukkan nomor jenis jin yang ingin dipanggil: "))
+        while jenis != 1 and jenis != 2:
+            print(f"\nTidak ada jenis jin \"{jenis}\"!\n")
+            jenis = int(input("Masukkan nomor jenis jin yang ingin dipanggil: "))
+        if jenis == 1:
+            print("Memilih jin \"Pengumpul\".\n")
+            tipe_jin = "jin_pengumpul"
+        else:
+            print("Memilih jin \"Pembangun\".\n")
+            tipe_jin = "jin_pembangun"
+        username = input("Masukkan username jin: ")
+        while search_log(username, user) != False or not(isRequired(username)):
+            if search_log(username, user) != False:
+                print(f"\nUsername \"{username}\" sudah diambil!\n")
+            else:
+                print("\nUsername mengandung karakter yang tidak didukung. Silahkan input username lain!\n")
+            username = input("Masukkan username jin: ")
+        password = input("Masukkan password jin: ")
+        while len(password)<5 or len(password)>25 or not(isRequired(username)):
+            if len(password)<5 or len(password)>25:
+                print(f"\nPassword panjangnya harus 5-25 karakter!\n")
+            else:
+                print("\Password mengandung karakter yang tidak didukung. Silahkan input username lain!\n")
+            password = input("Masukkan password jin: ")
+        print("Mengumpulkan sesajen...")
+        sleep(2)
+        print("Menyerahkan sesajen...")
+        sleep(2)
+        print("Membaca mantra...")
+        print(f"\nJin {username} berhasil dipanggil!\n")
+        add_jin([username,password,tipe_jin], tipe)
+    else:
+        print("Jumlah Jin telah maksimal! (100 jin). Bandung tidak dapat men-summon lebih dari itu\n")
+    
 
 # LOGIN HARUS DIBUAT PALING AKHIR, LANJUTKAN CODE DI ATAS BAGIAN INI
 # F01 - Login

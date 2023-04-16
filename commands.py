@@ -242,7 +242,37 @@ def ubahjin(user):
             else:
                 print("\nJin batal diubah.\n")
 
-
+# F03 - Summon Jin
+def summon_jin (user):
+# melakukan prosedur summonjin
+    total_jin, jin_kumpul, jin_bangun = count_jin(user)
+    if(total_jin > 100):
+        print("Jumlah Jin telah maksimal! (100 jin). Bandung tidak dapat men-summon lebih dari itu")
+    else:
+        print("Jenis jin yang dipanggil: ")
+        print("  (1) Pengumpul - Bertugas mengumpulkan bahan bangunan")
+        print("  (2) Pembangun - Bertugas membangun candi")
+        pilihan = int(input("Masukan nomor jenis jin yang ingin dipanggil: "))
+        if (pilihan == 1):
+            print('Memilih jin "Pengumpul".')
+        elif (pilihan == 2):
+            print('Memilih jin "Pembangun"')
+        else: 
+            print("Tidak ada jenis jin bernomor" + "'" + pilihan + "'")
+        username = input("Masukan username jin: ")
+        cari = search_log(username)
+        if (cari == False):
+            print(f'Username "{username}" tidak ada')
+        else:
+            pass_username = input("Masukan password jin: ")
+            if (len(pass_username) < 5 or len(pass_username) > 25):
+                print("Password panjangnya harus 5-25 karakter !")
+            else:
+                print("Mengumpulkan sesajen ...")
+                print("Menyerahkan sesajen ...")
+                print("Membacakan mantar ...")
+                print()
+                print(f'Jin {username} berhasil dipanggil')
 
 # LOGIN HARUS DIBUAT PALING AKHIR, LANJUTKAN CODE DI ATAS BAGIAN INI
 # F01 - Login

@@ -242,6 +242,14 @@ def ubahjin(user):
             else:
                 print("\nJin batal diubah.\n")
 
+# F03 - Summon Jin
+def summonjin(user):
+# menjalankan prosedur summon jin
+    print("Jenis jin yang dapat dipanggil:")
+    print(" (1) Pengumpul - Bertugas mengumpulkan bahan bangunan")
+    print(" (2) Pembangun - Bertugas membangun candi\n")
+    jenis = int(input(""))
+
 
 
 # LOGIN HARUS DIBUAT PALING AKHIR, LANJUTKAN CODE DI ATAS BAGIAN INI

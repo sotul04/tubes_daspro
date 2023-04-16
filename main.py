@@ -34,8 +34,12 @@ while True:
         if simpan == "y" or simpan == "Y":
             save(user_data, candi_data, bahan_data)
         exit()
+    elif command == "help":
+        help()
     elif command == "logout":
         print("Logout gagal!")
         print("Anda belum login, silahkan login terlebih dahulu sebelum melakukan logout.\n")
+    elif command == "summonjin" or command == "hapusjin" or command == "bangun" or command == "kumpul" or command == "batchkumpul" or command == "batchbangun" or command == "laporanjin" or command == "laporancandi" or command == "hancurkancandi" or command == "ayamberkokok":
+        print("Anda tidak bisa melakukan command tersebut karena anda belum login. Silahkan input command \"login\" untuk login sesuai akun anda.\n")
     else:
-        print("Anda tidak bisa melakukan command tersebut karena Anda belum login atau akun Anda tidak memiliki akses.")
+        print("Command tidak tersedia. Silahkan input command \"help\" untuk mengecek akses anda.\n")

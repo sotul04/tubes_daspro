@@ -143,3 +143,18 @@ def ribuan_parse(nominal):
             count = 0
     temp = 'Rp ' + temp
     return temp
+
+def isRequired(string):
+# fungsi untuk memvalidasi username dan password agar tidak konflik dengan tipe data
+    char = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#_/\\?()[]{}"
+    required = True
+    for i in range(len(string)):
+        ada = False
+        for j in range(len(char)):
+            if string[i] == char[j]:
+                ada = True
+                break
+        if ada == False:
+            required = False
+            break
+    return required

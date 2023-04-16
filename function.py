@@ -1,4 +1,7 @@
-def search_log(input,user):
+from data_type import *
+from typing import Type,Tuple,Any
+
+def search_log(input:str,user:Type[user])->Any:
 # return seluruh data pada array yang memuat username yang dicari
     found = False
     for i in range(1,user.Neff):
@@ -7,7 +10,7 @@ def search_log(input,user):
             break
     return found
 
-def search_position(input,user):
+def search_position(input:str,user:Type[user])->int:
 # return integer -> posisi dari username yang dicari pada detail data user
     found = 0
     for i in range(1,user.Neff):
@@ -16,7 +19,7 @@ def search_position(input,user):
             break
     return found
 
-def search_role(input,user):
+def search_role(input:str,user:Type[user])->Any:
 # return string -> role dari username yang dicari
     found = False
     for i in range(1,user.Neff):
@@ -25,7 +28,7 @@ def search_role(input,user):
             break
     return found
 
-def path_counter(path):
+def path_counter(path:str)->int:
 # fungsi yang digunakan untuk menghitung jumlah folder di dalam sebuah alamat path
     count = 1
     for i in range(len(path)):
@@ -33,7 +36,7 @@ def path_counter(path):
             count += 1
     return count
 
-def acakbangun(number,neff):
+def acakbangun(number:Type[number_colc],neff:int)->None:
 # fungsi ini akan mengubah data ANGKA ACAK saat dipanggil
     a = 11103515245
     c = 12345
@@ -46,7 +49,7 @@ def acakbangun(number,neff):
     number.array = temp
     number.Neff += neff
 
-def acakkumpul(number,neff):
+def acakkumpul(number:Type[number_colc],neff:int)->None:
 # fungsi ini akan mengubah data ANGKA ACAK saat dipanggil
     a = 11103515245
     c = 12347
@@ -59,20 +62,20 @@ def acakkumpul(number,neff):
     number.array = temp
     number.Neff += neff
 
-def acak_bangun(number):
+def acak_bangun(number:Type[number_colc])->int:
 # mengembalikan sebuah integer yang digunakan pada spesifikasi F06 dan F08
     acakbangun(number,1)
     result = number.array[number.Neff-1]%5
     if result == 0:
         result = 5
     return result
-def acak_kumpul(number):
+def acak_kumpul(number:Type[number_colc])->int:
 # mengembalikan sebuah integer yang digunakan pada spesifikasi F07 dan F08
     acakkumpul(number,1)
     result = number.array[number.Neff-1]%6
     return result
 
-def list_jin(role,user):
+def list_jin(role:str,user:Type[user])->Tuple[int,list]:
 # mengembalikan list yang berisi username jini bertipe role
     count = 0
     for i in range (1,user.Neff):
@@ -86,7 +89,7 @@ def list_jin(role,user):
             index += 1
     return count,temp
 
-def count_jin(user):
+def count_jin(user:Type[user])->Tuple[int]:
 # menghitung total jin, jumlah jin pengumpul, dan jin pembangun
     total_jin = user.Neff-3
     jin_kumpul = 0
@@ -96,7 +99,7 @@ def count_jin(user):
     jin_bangun = total_jin - jin_kumpul
     return total_jin,jin_kumpul,jin_bangun
 
-def list_candi(user,candi):
+def list_candi(user:Type[user],candi:Type[candi])->Tuple[int,List[list]]:
 # mengembalikan jumlah permbuat candi pada data candi dan list yang berisi nama pembuat dan jumlah candinya
     count = count_jin(user)[2]
     temp = [[0,0] for i in range (count)]
@@ -121,7 +124,7 @@ def list_candi(user,candi):
             temp[count-1] = [candi.detail[i][1],1]
     return count,temp
 
-def urut_abjad(list,count):
+def urut_abjad(list:List[str],count:int)->None:
 # mengurutkan list berisi string secara menaik dengan 
     for i in range(1,count):
         min = list[i]
@@ -130,7 +133,7 @@ def urut_abjad(list,count):
             list[idx+1],list[idx] = list[idx],list[idx+1]
             idx -= 1
 
-def ribuan_parse(nominal):
+def ribuan_parse(nominal:int)->str:
 # mengubah data integer menjadi string yang diformat ke dalam format Rupiah
     string = str(nominal)
     temp = ''
@@ -144,7 +147,7 @@ def ribuan_parse(nominal):
     temp = 'Rp ' + temp
     return temp
 
-def isRequired(string):
+def isRequired(string:str)->bool:
 # fungsi untuk memvalidasi username dan password agar tidak konflik dengan tipe data
     char = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#_/\\?()[]{}"
     required = True

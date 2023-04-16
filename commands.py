@@ -3,9 +3,11 @@ from time import sleep
 import os
 from data_manipulate import *
 from function import *
+from data_type import *
+from typing import List,Type
 
 #F13
-def load(folder):
+def load(folder:List[str])->None:
 # Menjalankan load saat program pertama kali dijalankan dan mengubah nilai input/output
 # folder menjadi path data eksternal yang digunakan jika tersedia, jika tidak program keluar
     parser = ArgumentParser()
@@ -26,7 +28,7 @@ def load(folder):
         print(f"\nFolder \"{foldr}\" tidak ditemukan.")
         exit()
 #F14
-def save(user,candi,bahan):
+def save(user:Type[user],candi:Type[candi],bahan:Type[bahan])->None:
 # Menjalankan prosedur save untuk menyimpan data perubahan selama permainan dijalankan
     path = input("Masukkan nama folder: ")
     folder = "save"
@@ -53,12 +55,12 @@ def save(user,candi,bahan):
 
 
 #F08
-def batch_kumpul(user,bahan,numbers):
+def batch_kumpul(user:Type[user],bahan:Type[bahan],numbers:Type[number_colc])->None:
 # melakukan fitur F08 - batchkumpul
     data = list_jin("jin_pengumpul", user)
     racikan = [0,0,0]
     if data[0] == 0:
-        print("Kumpul gagal. Anda tidak punya jin pengumpul. Silahkan summon terlebih dahulu.")
+        print("Kumpul gagal. Anda tidak punya jin pengumpul. Silahkan summon terlebih dahulu.\n")
     else:
         print(f"Mengerahkan {data[0]} jin untuk mengumpulkan bahan.")
         for i in range (data[0]):
@@ -71,7 +73,7 @@ def batch_kumpul(user,bahan,numbers):
         print(f"Jin menemukan total {racikan[0]} pasir, {racikan[1]} batu, {racikan[2]} air.\n")
         update_bahan(racikan, bahan)
 
-def batch_bangun(user,candi,bahan,numbers):
+def batch_bangun(user:Type[user],candi:Type[candi],bahan:Type[bahan],numbers:Type[number_colc])->None:
 # melakukan fitur F08 - batchbangun
     data = list_jin("jin_pembangun", user)
     bahan_total = [0,0,0]
@@ -107,7 +109,7 @@ def batch_bangun(user,candi,bahan,numbers):
             print(f"Bangun gagal. Kurang {kurang[0]} pasir, {kurang[1]} batu, {kurang[2]} air.\n")
 
 # F09 - Ambil Laporan Jin
-def laporanjin(user,candi,bahan):
+def laporanjin(user:Type[user],candi:Type[candi],bahan:Type[bahan])->None:
 # melakukan prosedur pengambilan laporan jin
     total_jin = count_jin(user)[0]
     jin_kumpul = count_jin(user)[1]
@@ -166,7 +168,7 @@ def laporanjin(user,candi,bahan):
 
 
 # F10 - Ambil Laporan Candi
-def laporancandi(candi):
+def laporancandi(candi:Type[candi])->None:
 # Melakukan prosedur F10 
     total_candi = candi.Neff-1
     total_bahan = [0,0,0]
@@ -200,7 +202,7 @@ def laporancandi(candi):
     print(f"> ID Candi Termurah: {id_murah}\n")    
 
 # F04 - Hilangkan Jin
-def hapusjin(user,candi):
+def hapusjin(user:Type[user],candi:Type[candi])->None:
 # Melakukan prosedur hapusjin //Akses: Bandung Bondowoso   
     username = input("Masukkan username jin : ")
     cond = search_log(username, user)
@@ -222,7 +224,7 @@ def hapusjin(user,candi):
                 print("\nJin batal dihapus dari alam gaib.\n")
 
 # F05 - Ubah Tipe Jin
-def ubahjin(user):
+def ubahjin(user:Type[user])->None:
 # melakukan prosedur ubahjin
     username = input("Masukkan username jin : ")
     cond = search_log(username, user)
@@ -246,7 +248,7 @@ def ubahjin(user):
                 print("\nJin batal diubah.\n")
 
 # F03 - Summon Jin
-def summonjin(user):
+def summonjin(user:Type[user])->None:
 # menjalankan prosedur summon jin
     if user.Neff < 103:
         print("Jenis jin yang dapat dipanggil:")
@@ -288,7 +290,7 @@ def summonjin(user):
         print("Jumlah Jin telah maksimal! (100 jin). Bandung tidak dapat men-summon lebih dari itu\n")
 
 # F06 - Jin Pembangun
-def bangun(username,candi,bahan,numbers):
+def bangun(username:str,candi:Type[candi],bahan:Type[bahan],numbers:Type[number_colc])->None:
 # melakukan prosedur jin pembangun
     pasir = acak_bangun(numbers)
     batu = acak_bangun(numbers)
@@ -309,7 +311,7 @@ def bangun(username,candi,bahan,numbers):
         print("Bahan bangunan tidak mencukupi.\nCandi tidak bisa dibangun!\n")
 
 # F07 - Jin Pengumpul
-def kumpul(bahan,numbers):
+def kumpul(bahan:Type[bahan],numbers:Type[number_colc])->None:
 # melakukan prosedur jin pengumpul
     pasir = aacak_kumpul(numbers)
     batu = aacak_kumpul(numbers)
@@ -319,7 +321,7 @@ def kumpul(bahan,numbers):
     update_bahan(racikan, bahan)
 
 # F11 - Hancurkan Candi
-def hancurkancandi(candi):
+def hancurkancandi(candi:Type[candi])->None:
 # melakukan prosedur hancurkan candi
     id = int(input("Masukkan ID candi: "))
     pos = search_position(id, candi)
@@ -336,7 +338,7 @@ def hancurkancandi(candi):
             print("\nCandi batal dihancurkan.\n")
 
 # F12 - Ayam Berkokok
-def ayamberkokok(candi):
+def ayamberkokok(candi:Type[candi])->None:
 # melakukan prosedur Ayam Berkokok
     print("Kukuruyuk.. Kukuruyuk..\n")
     jumlah_candi = candi.Neff-1
@@ -347,13 +349,13 @@ def ayamberkokok(candi):
         print("Selamat, Roro Jonggrang memenangkan permainan!\n*Bandung Bondowoso angry noise*\nRoro Jonggrang dikutuk menjadi candi.\n")
 
 # F15 - Help
-def help():
+def help()->None:
     print("=========== HELP ===========")
     print("1. login\n   Untuk masuk menggunakan akun")
     print("2. save\n   Untuk menyimpan perubahan data selama permainan")
     print("3. exit\n   Untuk keluar dari program dan kembali ke terminal\n")
 
-def help_bandung():
+def help_bandung()->None:
     print("=========== HELP ===========")
     print("1. logout\n   Untuk keluar dari akun yang digunakan sekarang")
     print("2. summonjin\n   Untuk memanggil jin")
@@ -365,7 +367,7 @@ def help_bandung():
     print("8. save\n   Untuk menyimpan perubahan data selama permainan")
     print("9. exit\n   Untuk keluar dari program dan kembali ke terminal\n")
 
-def help_roro():
+def help_roro()->None:
     print("=========== HELP ===========")
     print("1. logout\n   Untuk keluar dari akun yang digunakan sekarang")
     print("2. hancurkancandi\n   Untuk menghancurkan candi yang tersedia")
@@ -373,14 +375,14 @@ def help_roro():
     print("4. save\n   Untuk menyimpan perubahan data selama permainan")
     print("5. exit\n   Untuk keluar dari program dan kembali ke terminal\n")
 
-def help_jinbangun():
+def help_jinbangun()->None:
     print("=========== HELP ===========")
     print("1. logout\n   Untuk keluar dari akun yang digunakan sekarang")
     print("2. bangun\n   Untuk membangun candi")
     print("3. save\n   Untuk menyimpan perubahan data selama permainan")
     print("4. exit\n   Untuk keluar dari program dan kembali ke terminal\n")
 
-def help_jinkumpul():
+def help_jinkumpul()->None:
     print("=========== HELP ===========")
     print("1. logout\n   Untuk keluar dari akun yang digunakan sekarang")
     print("2. kumpul\n   Untuk mengumpulkan bahan-bahan")
@@ -389,7 +391,7 @@ def help_jinkumpul():
 
 # LOGIN HARUS DIBUAT PALING AKHIR, LANJUTKAN CODE DI ATAS BAGIAN INI
 # F01 - Login
-def login(user,candi,bahan,numbers,role):
+def login(user:Type[user],candi:Type[candi],bahan:Type[bahan],numbers:Type[number_colc],role:str)->None:
     username = input("Username: ")
     password = input("Password: ")
     cond = search_log(username, user)

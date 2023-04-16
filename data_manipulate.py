@@ -1,5 +1,6 @@
-import os
-def split(s,char):
+from typing import Type,List,Tuple,Any
+from data_type import *
+def split(s:str,char:str)->list:
 # mengubah data yang dibaca dari file .csv kemudian mengembalikan sebuah array
 # yang berisi string dari pemisahan yang ditandai dengan char
     sumofComma = 0
@@ -21,7 +22,7 @@ def split(s,char):
             temp += s[j]
     return list_value
 
-def read_user(path):
+def read_user(path:str)->Tuple[int,list]:
 # function list_csv (path : string {alamat file .csv}) -> array of array of string
 # mengembalikan sebuah array of array of string dari pemisahan yang ditandai semicolon (;)
 # pada setiap line pada file .csv yang dibaca
@@ -33,7 +34,7 @@ def read_user(path):
             index += 1
     return index,temp
 
-def read_candi(path):
+def read_candi(path:str)->Tuple[int,list]:
 # function list_csv (path : string {alamat file .csv}) -> array of array of string
 # mengembalikan sebuah array of array of string dari pemisahan yang ditandai semicolon (;)
 # pada setiap line pada file .csv yang dibaca
@@ -49,7 +50,7 @@ def read_candi(path):
             index += 1
     return index,temp
 
-def read_bahan(path):
+def read_bahan(path:str)->Tuple[int,list]:
 # function list_csv (path : string {alamat file .csv}) -> array of array of string
 # mengembalikan sebuah array of array of string dari pemisahan yang ditandai semicolon (;)
 # pada setiap line pada file .csv yang dibaca
@@ -65,7 +66,7 @@ def read_bahan(path):
     return index,temp
 
 
-def save_csv(tipe, path):
+def save_csv(tipe:Any, path:str)->None:
 #prosedur untuk menyimpan data pada file eksternal saat dipanggil
     temp = ''
     for i in range(tipe.Neff):
@@ -80,7 +81,7 @@ def save_csv(tipe, path):
     with open(path, "w", encoding="utf-8") as file:
         file.write(temp)
 
-def add_jin(data_jin, tipe):
+def add_jin(data_jin:list, tipe:Any)->None:
 # fungsi yang akan menambah data tambahan pada variabel yang menyimpan data
 # saat program berjalan
     for i in range(1,201):
@@ -88,9 +89,8 @@ def add_jin(data_jin, tipe):
             tipe.detail[i] = data_jin
             break
     tipe.Neff += 1
-    return tipe
 
-def remove_jin(username, tipe):
+def remove_jin(username:str, tipe:Type[user])->None:
 # fungsi yang akan menghapus data jin yang dicari dari data user
     temp = tipe.Neff
     for i in range (1,tipe.Neff):
@@ -101,7 +101,7 @@ def remove_jin(username, tipe):
     if temp != tipe.Neff:
         tipe.Neff -= 1
 
-def remove_candi(username, tipe):
+def remove_candi(username:str, tipe:Type[candi])->None:
 # fungsi yang akan menghapus semua candi yang dibangun jin yang 
 # pembuatnya bernama username yang diinput
     count = 0
@@ -120,7 +120,7 @@ def remove_candi(username, tipe):
                     tipe.detail[i] = tipe.detail[i+1]
         tipe.Neff -= 1
 
-def add_candi(username, racikan, tipe):
+def add_candi(username:str, racikan:list, tipe:Type[candi])->None:
 # add_candi akan menambah data candi dengan nomor id terkecil yang bisa disisipi
     if tipe.Neff < 101:
         min = 0
@@ -139,7 +139,7 @@ def add_candi(username, racikan, tipe):
             tipe.detail[i] = temp[idx]
             idx += 1
 
-def delete_candi(id_candi, tipe):
+def delete_candi(id_candi:int, tipe:Type[candi])->None:
 # delete_candi akan menghapus data candi dengan id = id_candi dari variabel global yang berisi data candi
     index = tipe.Neff
     for i in range (1,tipe.Neff):
@@ -151,7 +151,7 @@ def delete_candi(id_candi, tipe):
             tipe.detail[i] = tipe.detail[i+1]
         tipe.Neff -= 1
             
-def update_bahan(list, tipe):
+def update_bahan(list:list, tipe:Type[bahan])->None:
 # meng-update bahan saat dipanggil sesuai isi dari list
     for i in range (1,tipe.Neff):
         tipe.detail[i][2] += list[i-1]

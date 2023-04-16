@@ -1,11 +1,17 @@
 # tubes_daspro
 Tugas Besar Daspro K07-6
 
+# Cara Run
+1. Setelah diclone atau dipull reponya, buka cmd atau terminal (Jangan dirun pakai tombol run di vs-code)
+2. Alih directory ke tempat kalian simpan clone-nya trus run programnya dengan cara:
+3. "python main.py data_eksternal"        -> windows
+4. "python3 main.py data_eksternal"       -> linux, mac
+
 # Pembagian Spesifikasi
-1. John - F01* - Suthasoma (udah dikerjain bang tinggal edit dikit), F02* - Suthasoma, F03
-2. Reyndi - F06, F07, F11
-3. Erwan - F12, F15, F16* - Suthasoma (Udah dikerjain bg)
-5. Sutha - F04*, F05*, F08*, F09*, F10*, F13*, F14*
+1. John - F01*, F02*, F03* ~ John & Suthasoma
+2. Reyndi - F06*, F07*, F11* ~ Suthasoma
+3. Erwan - F12*, F15*, F16* ~ Suthasoma
+5. Sutha - F04*, F05*, F08*, F09*, F10*, F13*, F14* ~ Suthasoma
 
    (*) Selesai
 

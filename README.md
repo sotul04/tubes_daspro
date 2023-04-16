@@ -4,6 +4,7 @@ Tugas Besar Daspro K07-6
 # Cara Run
 1. Setelah diclone atau dipull reponya, buka cmd atau terminal (Jangan dirun pakai tombol run di vs-code)
 2. Alih directory ke tempat kalian simpan clone-nya trus run programnya dengan cara:
+
 python main.py data_eksternal        -> windows
 python3 main.py data_eksternal       -> linux, mac
 

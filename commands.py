@@ -20,6 +20,7 @@ def load(folder):
         print("Loading...")
         sleep(2)
         print("\nSelamat datang di program \"Manajerial Candi\"")
+        print("Masukkan command \"help\" untuk daftar command yang dapat kamu panggil.")
         folder[0] = foldr
     else:
         print(f"\nFolder \"{foldr}\" tidak ditemukan.")
@@ -41,12 +42,14 @@ def save(user,candi,bahan):
         if not (os.path.isdir(fold_temp)):
             os.mkdir(fold_temp)
             print(f"Membuat folder {fold_temp}...")
+            if i == repet-1:
+                print()
             sleep(1)
         if i == repet-1:
             save_csv(user, fold_temp+"/user.csv")
             save_csv(candi, fold_temp+"/candi.csv")
             save_csv(bahan, fold_temp+"/bahan_bangunan.csv")
-            print(f"\nBerhasil menyimpan data di folder {fold_temp}!\n")
+            print(f"Berhasil menyimpan data di folder {fold_temp}!\n")
 
 
 #F08
@@ -73,7 +76,7 @@ def batch_bangun(user,candi,bahan,numbers):
     data = list_jin("jin_pembangun", user)
     bahan_total = [0,0,0]
     if data[0] == 0:
-        print("Bangun gagal. Anda tidak punya jin pembangun. Silahkan summon terlebih dahulu.")
+        print("Bangun gagal. Anda tidak punya jin pembangun. Silahkan summon terlebih dahulu.\n")
     else:
         temp = [[] for i in range(data[0])]
         for i in range(data[0]):
@@ -154,7 +157,7 @@ def laporanjin(user,candi,bahan):
         #    jin_termalas = "-"
     print(f"\n> Total Jin: {total_jin}")
     print(f"> Total Jin Pengumpul: {jin_kumpul}")
-    print(f"> Total Jin Pembangun: {jin_kumpul}")
+    print(f"> Total Jin Pembangun: {jin_bangun}")
     print(f"> Jin Terajin: {jin_terajin}")
     print(f"> Jin Termalas: {jin_termalas}")
     print(f"> Jumlah Pasir: {bahan.detail[1][2]} unit")
@@ -208,10 +211,10 @@ def hapusjin(user,candi):
             print("\nTidak ada jin dengan username tersebut.\n")
         else:
             hapus = input(f"Apakah anda yakin ingin menghapus jin dengan username {username} (Y/N)? ")
-            while hapus != "Y" and hapus != "N":
+            while hapus != "Y" and hapus != "N" and hapus != "y" and hapus != "n":
                 print("\nInput anda salah silahkan input ulang.")
                 hapus = input(f"Apakah anda yakin ingin menghapus jin dengan username {username} (Y/N)? ")
-            if hapus == "Y":
+            if hapus == "Y" or hapus == "y":
                 print("\nJin telah dihapus dari alam gaib.\n")
                 remove_jin(username, user)
                 remove_candi(username, candi)
@@ -249,15 +252,15 @@ def summonjin(user):
         print("Jenis jin yang dapat dipanggil:")
         print(" (1) Pengumpul - Bertugas mengumpulkan bahan bangunan")
         print(" (2) Pembangun - Bertugas membangun candi\n")
-        jenis = int(input("Masukkan nomor jenis jin yang ingin dipanggil: "))
-        while jenis != 1 and jenis != 2:
+        jenis = input("Masukkan nomor jenis jin yang ingin dipanggil: ")
+        while jenis != "1" and jenis != "2":
             print(f"\nTidak ada jenis jin \"{jenis}\"!\n")
-            jenis = int(input("Masukkan nomor jenis jin yang ingin dipanggil: "))
-        if jenis == 1:
-            print("Memilih jin \"Pengumpul\".\n")
+            jenis = input("Masukkan nomor jenis jin yang ingin dipanggil: ")
+        if jenis == "1":
+            print("\nMemilih jin \"Pengumpul\".\n")
             tipe_jin = "jin_pengumpul"
         else:
-            print("Memilih jin \"Pembangun\".\n")
+            print("\nMemilih jin \"Pembangun\".\n")
             tipe_jin = "jin_pembangun"
         username = input("Masukkan username jin: ")
         while search_log(username, user) != False or not(isRequired(username)):
@@ -267,22 +270,122 @@ def summonjin(user):
                 print("\nUsername mengandung karakter yang tidak didukung. Silahkan input username lain!\n")
             username = input("Masukkan username jin: ")
         password = input("Masukkan password jin: ")
-        while len(password)<5 or len(password)>25 or not(isRequired(username)):
+        while len(password)<5 or len(password)>25 or not(isRequired(password)):
             if len(password)<5 or len(password)>25:
                 print(f"\nPassword panjangnya harus 5-25 karakter!\n")
             else:
-                print("\Password mengandung karakter yang tidak didukung. Silahkan input username lain!\n")
+                print("\nPassword mengandung karakter yang tidak didukung. Silahkan input password lain!\n")
             password = input("Masukkan password jin: ")
-        print("Mengumpulkan sesajen...")
-        sleep(2)
+        print("\nMengumpulkan sesajen...")
+        sleep(1)
         print("Menyerahkan sesajen...")
-        sleep(2)
+        sleep(1)
         print("Membaca mantra...")
+        sleep(1)
         print(f"\nJin {username} berhasil dipanggil!\n")
-        add_jin([username,password,tipe_jin], tipe)
+        add_jin([username,password,tipe_jin], user)
     else:
         print("Jumlah Jin telah maksimal! (100 jin). Bandung tidak dapat men-summon lebih dari itu\n")
-    
+
+# F06 - Jin Pembangun
+def bangun(username,candi,bahan,numbers):
+# melakukan prosedur jin pembangun
+    pasir = acak_bangun(numbers)
+    batu = acak_bangun(numbers)
+    air = acak_bangun(numbers)
+    racikan = [pasir,batu,air]
+    bisa_dibangun = True
+    for i in range (3):
+        if racikan[0] > bahan.detail[i+1][2]:
+            bisa_dibangun = False
+            break
+    if bisa_dibangun:
+        add_candi(username, racikan, candi)
+        racikan = [-pasir,-batu,-air]
+        update_bahan(racikan, bahan)
+        print("Candi berhasil dibangun.")
+        print(f"Sisa candi yang perlu dibangun: {101-candi.Neff}.\n")
+    else:
+        print("Bahan bangunan tidak mencukupi.\nCandi tidak bisa dibangun!\n")
+
+# F07 - Jin Pengumpul
+def kumpul(bahan,numbers):
+# melakukan prosedur jin pengumpul
+    pasir = aacak_kumpul(numbers)
+    batu = aacak_kumpul(numbers)
+    air = aacak_kumpul(numbers)
+    print(f"Jin menemukan {pasir} pasir, {batu} batu, dan {air} air.\n")
+    racikan = [pasir,batu,air]
+    update_bahan(racikan, bahan)
+
+# F11 - Hancurkan Candi
+def hancurkancandi(candi):
+# melakukan prosedur hancurkan candi
+    id = int(input("Masukkan ID candi: "))
+    pos = search_position(id, candi)
+    if pos == 0:
+        print("\nTidak ada candi dengan ID tersebut.\n")
+    else:
+        permit = input(f"Apakah anda yakin ingin menghancurkan candi ID: {id} (Y/N)? ")
+        while permit != 'y' and permit != 'Y' and permit != 'n' and permit != 'N':
+            permit = input(f"Apakah anda yakin ingin menghancurkan candi ID: {id} (Y/N)? ")
+        if permit == 'y' or permit == 'Y':
+            print("\nCandi telah berhasil dihancurkan.\n")
+            delete_candi(id, candi)
+        else:
+            print("\nCandi batal dihancurkan.\n")
+
+# F12 - Ayam Berkokok
+def ayamberkokok(candi):
+# melakukan prosedur Ayam Berkokok
+    print("Kukuruyuk.. Kukuruyuk..\n")
+    jumlah_candi = candi.Neff-1
+    print(f"Jumlah Candi: {jumlah_candi}\n")
+    if jumlah_candi == 100:
+        print("Yah, Bandung Bondowoso memenangkan permainan!\n")
+    else:
+        print("Selamat, Roro Jonggrang memenangkan permainan!\n*Bandung Bondowoso angry noise*\nRoro Jonggrang dikutuk menjadi candi.\n")
+
+# F15 - Help
+def help():
+    print("=========== HELP ===========")
+    print("1. login\n   Untuk masuk menggunakan akun")
+    print("2. save\n   Untuk menyimpan perubahan data selama permainan")
+    print("3. exit\n   Untuk keluar dari program dan kembali ke terminal\n")
+
+def help_bandung():
+    print("=========== HELP ===========")
+    print("1. logout\n   Untuk keluar dari akun yang digunakan sekarang")
+    print("2. summonjin\n   Untuk memanggil jin")
+    print("3. hapusjin\n   Untuk menghapus jin sekaligus candi yang dibuatnya")
+    print("4. batchkumpul\n   Untuk mengerahkan semua Jin Pengumpul mengumpulkan bahan-bahan")
+    print("5. batchbangun\n   Untuk mengerahkan semua Jin Pembangun membangun candi")
+    print("6. laporanjin\n   Untuk melihat semua data pekerjaan dari semua jin")
+    print("7. laporancandi\n   Untuk melihat semua data candi")
+    print("8. save\n   Untuk menyimpan perubahan data selama permainan")
+    print("9. exit\n   Untuk keluar dari program dan kembali ke terminal\n")
+
+def help_roro():
+    print("=========== HELP ===========")
+    print("1. logout\n   Untuk keluar dari akun yang digunakan sekarang")
+    print("2. hancurkancandi\n   Untuk menghancurkan candi yang tersedia")
+    print("3. ayamberkokok\n   Untuk menentukan pemenang permainan dan keluar dari program")
+    print("4. save\n   Untuk menyimpan perubahan data selama permainan")
+    print("5. exit\n   Untuk keluar dari program dan kembali ke terminal\n")
+
+def help_jinbangun():
+    print("=========== HELP ===========")
+    print("1. logout\n   Untuk keluar dari akun yang digunakan sekarang")
+    print("2. bangun\n   Untuk membangun candi")
+    print("3. save\n   Untuk menyimpan perubahan data selama permainan")
+    print("4. exit\n   Untuk keluar dari program dan kembali ke terminal\n")
+
+def help_jinkumpul():
+    print("=========== HELP ===========")
+    print("1. logout\n   Untuk keluar dari akun yang digunakan sekarang")
+    print("2. kumpul\n   Untuk mengumpulkan bahan-bahan")
+    print("3. save\n   Untuk menyimpan perubahan data selama permainan")
+    print("4. exit\n   Untuk keluar dari program dan kembali ke terminal\n")
 
 # LOGIN HARUS DIBUAT PALING AKHIR, LANJUTKAN CODE DI ATAS BAGIAN INI
 # F01 - Login
@@ -303,13 +406,13 @@ def login(user,candi,bahan,numbers,role):
                     break
                 elif pilihan == "help":
                     if role == "bandung_bondowoso":
-                        pass
+                        help_bandung()
                     elif role == "roro_jonggrang":
-                        pass
+                        help_roro()
                     elif role == "jin_pengumpul":
-                        pass
+                        help_jinkumpul()
                     else:
-                        pass
+                        help_jinbangun()
                 elif pilihan == "exit":
                     simpan = input("Apakah Anda mau melakukan penyimpanan file yang sudah diubah? (y/n) ")
                     while simpan != "y" and simpan != "Y" and simpan != "n" and simpan != "N":
@@ -322,54 +425,54 @@ def login(user,candi,bahan,numbers,role):
                     print(f"Anda telah login dengan username {username}, silahkan lakukan \"logout\" sebelum melakukan login kembali.\n")
                 elif pilihan == "summonjin":
                     if role == "bandung_bondowoso":
-                        pass
+                        summonjin(user)
                     else:
-                        print("Summon Jin hanya dapat diakses oleh akun Bandung Bodowoso.")
+                        print("Summon Jin hanya dapat diakses oleh akun Bandung Bodowoso.\n")
                 elif pilihan == "hapusjin":
                     if role == "bandung_bondowoso":
                         hapusjin(user, candi)
                     else:
-                        print("Hapus Jin hanya dapat diakses oleh akun Bandung Bondowoso.")
+                        print("Hapus Jin hanya dapat diakses oleh akun Bandung Bondowoso.\n")
                 elif pilihan == "bangun":
                     if role == "jin_pembangun":
-                        pass
+                        bangun(username, candi, bahan, numbers)
                     else:
-                        print("Bangun hanya dapat diakses oleh akun Jin Pembangun.")
+                        print("Bangun hanya dapat diakses oleh akun Jin Pembangun.\n")
                 elif pilihan == "kumpul":
                     if role == "jin_pembangun":
-                        pass
+                        kumpul(bahan, numbers)
                     else:
-                        print("Kumpul hanya dapat diakses oleh akun Jin Pengumpul.")
+                        print("Kumpul hanya dapat diakses oleh akun Jin Pengumpul.\n")
                 elif pilihan == "batchkumpul":
                     if role == "bandung_bondowoso":
                         batch_kumpul(user, bahan, numbers)
                     else:
-                        print("Batch Kumpul hanya dapat diakses oleh akun Bandung Bondowoso.")
+                        print("Batch Kumpul hanya dapat diakses oleh akun Bandung Bondowoso.\n")
                 elif pilihan == "batchbangun":
                     if role == "bandung_bondowoso":
                         batch_bangun(user, candi, bahan, numbers)
                     else:
-                        print("Batch Bangun hanya dapat diakses oleh akun Bandung Bondowoso.")
+                        print("Batch Bangun hanya dapat diakses oleh akun Bandung Bondowoso.\n")
                 elif pilihan == "laporanjin":
                     if role == "bandung_bondowoso":
                         laporanjin(user, candi, bahan)
                     else:
-                        print("Laporan jin hanya dapat diakses oleh akun Bandung Bondowoso.")
+                        print("Laporan jin hanya dapat diakses oleh akun Bandung Bondowoso.\n")
                 elif pilihan == "laporancandi":
                     if role == "bandung_bondowoso":
                         laporancandi(candi)
                     else:
-                        print("Laporan candi hanya dapat diakses oleh akun Bandung Bondowoso.")
+                        print("Laporan candi hanya dapat diakses oleh akun Bandung Bondowoso.\n")
                 elif pilihan == "hancurkancandi":
                     if role == "roro_jonggrang":
-                        pass
+                        hancurkancandi(candi)
                     else:
-                        print("Hancurkan Candi hanya dapat diakses oleh akun Roro Jonggrang.")
+                        print("Hancurkan Candi hanya dapat diakses oleh akun Roro Jonggrang.\n")
                 elif pilihan == "ayamberkokok":
                     if role == "roro_jonggrang":
-                        pass
+                        ayamberkokok(candi)
                     else:
-                        print("Ayam Berkokok hanya dapat diakses oleh akun Roro Jonggrang.")
+                        print("Ayam Berkokok hanya dapat diakses oleh akun Roro Jonggrang.\n")
                 else:
                     print("Command tidak tersedia. Silahkan input command \"help\" untuk mengecek akses anda.\n")   
             role = None

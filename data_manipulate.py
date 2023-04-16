@@ -155,5 +155,4 @@ def update_bahan(list, tipe):
 # meng-update bahan saat dipanggil sesuai isi dari list
     for i in range (1,tipe.Neff):
         tipe.detail[i][2] += list[i-1]
-    return tipe
 

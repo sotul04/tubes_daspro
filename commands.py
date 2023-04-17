@@ -362,12 +362,12 @@ def help_bandung()->None:
     print("2.  summonjin\n    Untuk memanggil jin")
     print("3.  hapusjin\n    Untuk menghapus jin sekaligus candi yang dibuatnya")
     print("4.  ubahjib\n    Untuk menukar tipe jin")
-    print("5.  batchkumpul\n   Untuk mengerahkan semua Jin Pengumpul mengumpulkan bahan-bahan")
-    print("6.  batchbangun\n   Untuk mengerahkan semua Jin Pembangun membangun candi")
-    print("7.  laporanjin\n   Untuk melihat semua data pekerjaan dari semua jin")
-    print("8.  laporancandi\n   Untuk melihat semua data candi")
-    print("9.  save\n   Untuk menyimpan perubahan data selama permainan")
-    print("10. exit\n   Untuk keluar dari program dan kembali ke terminal\n")
+    print("5.  batchkumpul\n    Untuk mengerahkan semua Jin Pengumpul mengumpulkan bahan-bahan")
+    print("6.  batchbangun\n    Untuk mengerahkan semua Jin Pembangun membangun candi")
+    print("7.  laporanjin\n    Untuk melihat semua data pekerjaan dari semua jin")
+    print("8.  laporancandi\n    Untuk melihat semua data candi")
+    print("9.  save\n    Untuk menyimpan perubahan data selama permainan")
+    print("10. exit\n    Untuk keluar dari program dan kembali ke terminal\n")
 
 def help_roro()->None:
     print("=========== HELP ===========")

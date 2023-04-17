@@ -16,7 +16,7 @@ user_data = user(read_user(u_path)[0],read_user(u_path)[1])
 candi_data = candi(read_candi(c_path)[0],read_candi(c_path)[1])
 bahan_data = bahan(read_bahan(b_path)[0],read_bahan(b_path)[1])
 # memuat numbers {variabel yang menyimpan angka random selama permainan}
-numbers = number_colc(1, [int(time)%11103515245])
+numbers = number_colc(1, [int(time())%11103515245])
 
 # PERMAINAN
 role = None

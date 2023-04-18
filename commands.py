@@ -191,7 +191,7 @@ def laporancandi(candi:Type[candi])->None:
                 idx -= 1
         if total_candi == 1:
             id_mahal = str(candi_detail[0][0])+" ("+ribuan_parse(candi_detail[0][1])+")"
-            id_murah = str(candi_detail[0][0])+" "+ribuan_parse(candi_detail[0][1])
+            id_murah = str(candi_detail[0][0])+" ("+ribuan_parse(candi_detail[0][1])+")"
         else:
             id_mahal = str(candi_detail[total_candi-1][0])+" ("+ribuan_parse(candi_detail[total_candi-1][1])+")"
             id_murah = str(candi_detail[0][0])+" ("+ribuan_parse(candi_detail[0][1])+")"

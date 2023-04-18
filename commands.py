@@ -5,7 +5,7 @@ from data_manipulate import *
 from function import *
 from data_type import *
 from typing import List,Type
-
+from undo import stack, undo
 #F13
 def load(folder:List[str])->None:
 # Menjalankan load saat program pertama kali dijalankan dan mengubah nilai input/output
@@ -202,8 +202,9 @@ def laporancandi(candi:Type[candi])->None:
     print(f"> ID Candi Termurah: {id_murah}\n")    
 
 # F04 - Hilangkan Jin
-def hapusjin(user:Type[user],candi:Type[candi])->None:
-# Melakukan prosedur hapusjin //Akses: Bandung Bondowoso   
+def hapusjin(user:Type[user],candi:Type[candi],stack:Type[stack])->None:
+# Melakukan prosedur hapusjin //Akses: Bandung Bondowoso 
+    from undo import update_stack, tabCandi
     username = input("Masukkan username jin : ")
     cond = search_log(username, user)
     if cond == False:
@@ -219,7 +220,10 @@ def hapusjin(user:Type[user],candi:Type[candi])->None:
             if hapus == "Y" or hapus == "y":
                 print("\nJin telah dihapus dari alam gaib.\n")
                 remove_jin(username, user)
-                remove_candi(username, candi)
+                tabcandi = tabCandi(0)
+                remove_candi(username, candi, tabcandi)
+                if cond[2] == "jin_pembangun":
+                    update_stack(stack, cond, tabcandi)
             else:
                 print("\nJin batal dihapus dari alam gaib.\n")
 
@@ -365,8 +369,9 @@ def help_bandung()->None:
     print("6.  batchbangun\n    Untuk mengerahkan semua Jin Pembangun membangun candi")
     print("7.  laporanjin\n    Untuk melihat semua data pekerjaan dari semua jin")
     print("8.  laporancandi\n    Untuk melihat semua data candi")
-    print("9.  save\n    Untuk menyimpan perubahan data selama permainan")
-    print("10. exit\n    Untuk keluar dari program dan kembali ke terminal\n")
+    print("9.  undo\n    Untuk mengembalikan jin dan candinya setelah dia dihapus")
+    print("10. save\n    Untuk menyimpan perubahan data selama permainan")
+    print("11. exit\n    Untuk keluar dari program dan kembali ke terminal\n")
 
 def help_roro()->None:
     print("=========== HELP ===========")
@@ -392,7 +397,7 @@ def help_jinkumpul()->None:
 
 # LOGIN HARUS DIBUAT PALING AKHIR, LANJUTKAN CODE DI ATAS BAGIAN INI
 # F01 - Login
-def login(user:Type[user],candi:Type[candi],bahan:Type[bahan],numbers:Type[number_colc],role:str)->None:
+def login(user:Type[user],candi:Type[candi],bahan:Type[bahan],numbers:Type[number_colc],role:str,stack:Type[stack])->None:
     username = input("Username: ")
     password = input("Password: ")
     cond = search_log(username, user)
@@ -433,7 +438,7 @@ def login(user:Type[user],candi:Type[candi],bahan:Type[bahan],numbers:Type[numbe
                         print("Summon Jin hanya dapat diakses oleh akun Bandung Bodowoso.\n")
                 elif pilihan == "hapusjin":
                     if role == "bandung_bondowoso":
-                        hapusjin(user, candi)
+                        hapusjin(user, candi, stack)
                     else:
                         print("Hapus Jin hanya dapat diakses oleh akun Bandung Bondowoso.\n")
                 elif pilihan == "ubahjin":
@@ -471,6 +476,11 @@ def login(user:Type[user],candi:Type[candi],bahan:Type[bahan],numbers:Type[numbe
                         laporancandi(candi)
                     else:
                         print("Laporan candi hanya dapat diakses oleh akun Bandung Bondowoso.\n")
+                elif pilihan == "undo":
+                    if role == "bandung_bondowoso":
+                        undo(stack, user, candi)
+                    else:
+                        print("Undo hanya dapat diakses oleh akun Bandung Bondowoso.\n")
                 elif pilihan == "hancurkancandi":
                     if role == "roro_jonggrang":
                         hancurkancandi(candi)

@@ -1,5 +1,7 @@
 from typing import Type,List,Tuple,Any
 from data_type import *
+from undo import tabCandi
+
 def split(s:str,char:str)->list:
 # mengubah data yang dibaca dari file .csv kemudian mengembalikan sebuah array
 # yang berisi string dari pemisahan yang ditandai dengan char
@@ -101,13 +103,18 @@ def remove_jin(username:str, tipe:Type[user])->None:
     if temp != tipe.Neff:
         tipe.Neff -= 1
 
-def remove_candi(username:str, tipe:Type[candi])->None:
+def remove_candi(username:str, tipe:Type[candi], tabcandi:Type[tabCandi])->None:
 # fungsi yang akan menghapus semua candi yang dibangun jin yang 
 # pembuatnya bernama username yang diinput
     count = 0
     for i in range(1,tipe.Neff):
         if username == tipe.detail[i][1]:
             count += 1
+            tabcandi.Neff += 1
+            temp = [0 for i in range(tabcandi.Neff)]
+            for i in range (tabcandi.Neff-1):
+                temp[i] = tabcandi.detail[i]
+            tabcandi.detail = temp
     for j in range(count):
         found = False
         for i in range (1,tipe.Neff+1):

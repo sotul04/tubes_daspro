@@ -1,18 +1,27 @@
 from typing import Type, List
 from function import search_log
+from data_type import user, candi
 
 class tabCandi:
+# tipe bentukan
+# type tabCandi : < Neff : integer;
+#                   detail : array of array {data candi, yaitu id, pembuat, pasir, batu, dan air} >
     def __init__(self,Neff:int,detail:List[list] = []):
         self.Neff = Neff
         self.detail = detail
 
 class stack:
+# tipe bentukan
+# type stack : < pos : integer; {nilai indeks terbesar data efektif}
+#                users : array of array of string; {menyimpan data user yang disimpan ke stack untuk prosedur undo}
+#                candi : array of tabCandi {data beberapa candi} >
     def __init__(self,pos:int,users:List[List[str]] = [],candi:Type[List[tabCandi]] = []):
         self.pos = pos
         self.users = users
         self.candi = candi
 
-def update_stack(stack,user_dat,tabcandi):
+def update_stack(stack:Type[stack],user_dat:List[str],tabcandi:Type[tabCandi])->None:
+# fungsi ini menambah data pada stack setiap kali ada jin pembangun yang dihapus
     stack.pos += 1
     temp_u = [0 for i in range(stack.pos)]
     temp_c = [0 for i in range(stack.pos)]
@@ -24,7 +33,8 @@ def update_stack(stack,user_dat,tabcandi):
     stack.users = temp_u
     stack.candi = temp_c
 
-def undo(stack,user,candi):
+def undo(stack:Type[stack],user:Type[user],candi:Type[candi])->None:
+# mengembalikan data candi dan jin pembangun yang sebelumnya telah dihapus
     from data_manipulate import add_jin,add_candi
     if stack.pos == 0:
         print("Tidak ada jin dan candi yang bisa dikembalikan.\n")

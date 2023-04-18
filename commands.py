@@ -6,6 +6,7 @@ from function import *
 from data_type import *
 from typing import List,Type
 from undo import stack, undo
+
 #F13
 def load(folder:List[str])->None:
 # Menjalankan load saat program pertama kali dijalankan dan mengubah nilai input/output
@@ -349,7 +350,7 @@ def ayamberkokok(candi:Type[candi])->None:
     if jumlah_candi == 100:
         print("Yah, Bandung Bondowoso memenangkan permainan!\n")
     else:
-        print("Selamat, Roro Jonggrang memenangkan permainan!\n*Bandung Bondowoso angry noise*\nRoro Jonggrang dikutuk menjadi candi.")
+        print("Selamat, Roro Jonggrang memenangkan permainan!\n*Bandung Bondowoso angry noise*\nRoro Jonggrang dikutuk menjadi candi.\n")
     exit()
 
 # F15 - Help
@@ -398,6 +399,7 @@ def help_jinkumpul()->None:
 # LOGIN HARUS DIBUAT PALING AKHIR, LANJUTKAN CODE DI ATAS BAGIAN INI
 # F01 - Login
 def login(user:Type[user],candi:Type[candi],bahan:Type[bahan],numbers:Type[number_colc],role:str,stack:Type[stack])->None:
+# melakukan prosedur login
     username = input("Username: ")
     password = input("Password: ")
     cond = search_log(username, user)

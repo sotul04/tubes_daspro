@@ -8,9 +8,9 @@ Tugas Besar Daspro K07-6
 4. "python3 main.py data_eksternal"       -> linux, mac
 
 # Pembagian Spesifikasi
-1. John - F01*, F02*, F03* ~ John & Suthasoma
-2. Reyndi - F06*, F07*, F11* ~ Suthasoma
-3. Erwan - F12*, F15*, F16* ~ Suthasoma
+1. John - F01*, F02*, F03*
+2. Reyndi - F06*, F07*, F11*
+3. Erwan - F12*, F15*, F16*
 5. Sutha - F04*, F05*, F08*, F09*, F10*, F13*, F14* ~ Suthasoma
 
    (*) Selesai

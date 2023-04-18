@@ -69,7 +69,8 @@ def read_bahan(path:str)->Tuple[int,list]:
 
 
 def save_csv(tipe:Any, path:str)->None:
-#prosedur untuk menyimpan data pada file eksternal saat dipanggil
+# prosedur untuk menyimpan data pada file eksternal saat dipanggil
+# digunakan untuk menyimpan data user, candi, dan bahan bangunan
     temp = ''
     for i in range(tipe.Neff):
         tent = ''
@@ -107,13 +108,14 @@ def remove_candi(username:str, tipe:Type[candi], tabcandi:Type[tabCandi])->None:
 # fungsi yang akan menghapus semua candi yang dibangun jin yang 
 # pembuatnya bernama username yang diinput
     count = 0
-    for i in range(1,tipe.Neff):
-        if username == tipe.detail[i][1]:
+    for j in range(1,tipe.Neff):
+        if username == tipe.detail[j][1]:
             count += 1
             tabcandi.Neff += 1
             temp = [0 for i in range(tabcandi.Neff)]
             for i in range (tabcandi.Neff-1):
                 temp[i] = tabcandi.detail[i]
+            temp[tabcandi.Neff-1] = tipe.detail[j]
             tabcandi.detail = temp
     for j in range(count):
         found = False

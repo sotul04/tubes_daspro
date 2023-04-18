@@ -237,10 +237,9 @@ def ubahjin(user:Type[user])->None:
             tipe_jin = "Pengumpul" if cond[2] == "jin_pengumpul" else "Pembangun"
             ubah_ke = "Pengumpul" if cond[2] != "jin_pengumpul" else "Pembangun"
             ubah = input(f"Jin ini bertipe \"{tipe_jin}\". Yakin ingin mengubah ke tipe \"{ubah_ke}\" (Y/N)? ")
-            while ubah != "Y" and ubah != "N":
-                print("\nInput anda salah silahkan input ulang.")
+            while ubah != "Y" and ubah != "N" and ubah != "n" and ubah != 'y':
                 ubah = input(f"Jin ini bertipe \"{tipe_jin}\". Yakin ingin mengubah ke tipe \"{ubah_ke}\" (Y/N)? ")
-            if ubah == "Y":
+            if ubah == "Y" or ubah == "y":
                 print("\nJin telah berhasil diubah.\n")
                 idx = search_position(username, user)
                 user.detail[idx][2] = "jin_pengumpul" if ubah_ke != "Pembangun" else "jin_pembangun"
@@ -298,7 +297,7 @@ def bangun(username:str,candi:Type[candi],bahan:Type[bahan],numbers:Type[number_
     racikan = [pasir,batu,air]
     bisa_dibangun = True
     for i in range (3):
-        if racikan[0] > bahan.detail[i+1][2]:
+        if bahan.detail[i+1][2] < racikan[i]:
             bisa_dibangun = False
             break
     if bisa_dibangun:
@@ -313,9 +312,9 @@ def bangun(username:str,candi:Type[candi],bahan:Type[bahan],numbers:Type[number_
 # F07 - Jin Pengumpul
 def kumpul(bahan:Type[bahan],numbers:Type[number_colc])->None:
 # melakukan prosedur jin pengumpul
-    pasir = aacak_kumpul(numbers)
-    batu = aacak_kumpul(numbers)
-    air = aacak_kumpul(numbers)
+    pasir = acak_kumpul(numbers)
+    batu = acak_kumpul(numbers)
+    air = acak_kumpul(numbers)
     print(f"Jin menemukan {pasir} pasir, {batu} batu, dan {air} air.\n")
     racikan = [pasir,batu,air]
     update_bahan(racikan, bahan)
@@ -346,7 +345,7 @@ def ayamberkokok(candi:Type[candi])->None:
     if jumlah_candi == 100:
         print("Yah, Bandung Bondowoso memenangkan permainan!\n")
     else:
-        print("Selamat, Roro Jonggrang memenangkan permainan!\n*Bandung Bondowoso angry noise*\nRoro Jonggrang dikutuk menjadi candi.\n")
+        print("Selamat, Roro Jonggrang memenangkan permainan!\n*Bandung Bondowoso angry noise*\nRoro Jonggrang dikutuk menjadi candi.")
     exit()
 
 # F15 - Help
@@ -361,7 +360,7 @@ def help_bandung()->None:
     print("1.  logout\n    Untuk keluar dari akun yang digunakan sekarang")
     print("2.  summonjin\n    Untuk memanggil jin")
     print("3.  hapusjin\n    Untuk menghapus jin sekaligus candi yang dibuatnya")
-    print("4.  ubahjib\n    Untuk menukar tipe jin")
+    print("4.  ubahjin\n    Untuk menukar tipe jin")
     print("5.  batchkumpul\n    Untuk mengerahkan semua Jin Pengumpul mengumpulkan bahan-bahan")
     print("6.  batchbangun\n    Untuk mengerahkan semua Jin Pembangun membangun candi")
     print("7.  laporanjin\n    Untuk melihat semua data pekerjaan dari semua jin")

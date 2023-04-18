@@ -5,7 +5,6 @@ from data_manipulate import *
 from function import *
 from data_type import *
 from typing import List,Type
-from undo import *
 
 #F13
 def load(folder:List[str])->None:
@@ -203,33 +202,26 @@ def laporancandi(candi:Type[candi])->None:
     print(f"> ID Candi Termurah: {id_murah}\n")    
 
 # F04 - Hilangkan Jin
-def hapusjin(user:Type[user],candi:Type[candi],stack:Type[stack])->None:
+def hapusjin(user:Type[user],candi:Type[candi])->None:
 # Melakukan prosedur hapusjin //Akses: Bandung Bondowoso   
     username = input("Masukkan username jin : ")
     cond = search_log(username, user)
-    print(cond)
     if cond == False:
         print("\nTidak ada jin dengan username tersebut.\n")
     else:
         if cond[2] != "jin_pengumpul" and cond[2] != "jin_pembangun":
             print("\nTidak ada jin dengan username tersebut.\n")
         else:
-            pos_1 = stack.pos
-            pos_2 = stack.pos
             hapus = input(f"Apakah anda yakin ingin menghapus jin dengan username {username} (Y/N)? ")
             while hapus != "Y" and hapus != "N" and hapus != "y" and hapus != "n":
                 print("\nInput anda salah silahkan input ulang.")
                 hapus = input(f"Apakah anda yakin ingin menghapus jin dengan username {username} (Y/N)? ")
             if hapus == "Y" or hapus == "y":
                 print("\nJin telah dihapus dari alam gaib.\n")
-                if cond[2] == "jin_pembangun":
-                    update_stack(stack, user, candi, username)
-                    pos_2 = stack.pos
+                remove_jin(username, user)
+                remove_candi(username, candi)
             else:
                 print("\nJin batal dihapus dari alam gaib.\n")
-            if pos_2>pos_1:
-                remove_candi(username, candi)
-                remove_jin(username, user)
 
 # F05 - Ubah Tipe Jin
 def ubahjin(user:Type[user])->None:
@@ -245,9 +237,9 @@ def ubahjin(user:Type[user])->None:
             tipe_jin = "Pengumpul" if cond[2] == "jin_pengumpul" else "Pembangun"
             ubah_ke = "Pengumpul" if cond[2] != "jin_pengumpul" else "Pembangun"
             ubah = input(f"Jin ini bertipe \"{tipe_jin}\". Yakin ingin mengubah ke tipe \"{ubah_ke}\" (Y/N)? ")
-            while ubah != "Y" and ubah != "N" and ubah != "n" and ubah != "y":
+            while ubah != "Y" and ubah != "N" and ubah != "n" and ubah != 'y':
                 ubah = input(f"Jin ini bertipe \"{tipe_jin}\". Yakin ingin mengubah ke tipe \"{ubah_ke}\" (Y/N)? ")
-            if ubah == "Y" or ubah == 'y':
+            if ubah == "Y" or ubah == "y":
                 print("\nJin telah berhasil diubah.\n")
                 idx = search_position(username, user)
                 user.detail[idx][2] = "jin_pengumpul" if ubah_ke != "Pembangun" else "jin_pembangun"
@@ -305,7 +297,7 @@ def bangun(username:str,candi:Type[candi],bahan:Type[bahan],numbers:Type[number_
     racikan = [pasir,batu,air]
     bisa_dibangun = True
     for i in range (3):
-        if racikan[0] > bahan.detail[i+1][2]:
+        if bahan.detail[i+1][2] < racikan[i]:
             bisa_dibangun = False
             break
     if bisa_dibangun:
@@ -353,7 +345,7 @@ def ayamberkokok(candi:Type[candi])->None:
     if jumlah_candi == 100:
         print("Yah, Bandung Bondowoso memenangkan permainan!\n")
     else:
-        print("Selamat, Roro Jonggrang memenangkan permainan!\n*Bandung Bondowoso angry noise*\nRoro Jonggrang dikutuk menjadi candi.\n")
+        print("Selamat, Roro Jonggrang memenangkan permainan!\n*Bandung Bondowoso angry noise*\nRoro Jonggrang dikutuk menjadi candi.")
     exit()
 
 # F15 - Help
@@ -368,14 +360,13 @@ def help_bandung()->None:
     print("1.  logout\n    Untuk keluar dari akun yang digunakan sekarang")
     print("2.  summonjin\n    Untuk memanggil jin")
     print("3.  hapusjin\n    Untuk menghapus jin sekaligus candi yang dibuatnya")
-    print("4.  ubahjib\n    Untuk menukar tipe jin")
+    print("4.  ubahjin\n    Untuk menukar tipe jin")
     print("5.  batchkumpul\n    Untuk mengerahkan semua Jin Pengumpul mengumpulkan bahan-bahan")
     print("6.  batchbangun\n    Untuk mengerahkan semua Jin Pembangun membangun candi")
     print("7.  laporanjin\n    Untuk melihat semua data pekerjaan dari semua jin")
     print("8.  laporancandi\n    Untuk melihat semua data candi")
-    print("10. undo\n    Untuk mengembalikan jin dan candi yang dia buat yang telah dihapus")
-    print("10. save\n    Untuk menyimpan perubahan data selama permainan")
-    print("11. exit\n    Untuk keluar dari program dan kembali ke terminal\n")
+    print("9.  save\n    Untuk menyimpan perubahan data selama permainan")
+    print("10. exit\n    Untuk keluar dari program dan kembali ke terminal\n")
 
 def help_roro()->None:
     print("=========== HELP ===========")
@@ -401,7 +392,7 @@ def help_jinkumpul()->None:
 
 # LOGIN HARUS DIBUAT PALING AKHIR, LANJUTKAN CODE DI ATAS BAGIAN INI
 # F01 - Login
-def login(user:Type[user],candi:Type[candi],bahan:Type[bahan],numbers:Type[number_colc],role:str,stack:Type[stack])->None:
+def login(user:Type[user],candi:Type[candi],bahan:Type[bahan],numbers:Type[number_colc],role:str)->None:
     username = input("Username: ")
     password = input("Password: ")
     cond = search_log(username, user)
@@ -442,7 +433,7 @@ def login(user:Type[user],candi:Type[candi],bahan:Type[bahan],numbers:Type[numbe
                         print("Summon Jin hanya dapat diakses oleh akun Bandung Bodowoso.\n")
                 elif pilihan == "hapusjin":
                     if role == "bandung_bondowoso":
-                        hapusjin(user, candi, stack)
+                        hapusjin(user, candi)
                     else:
                         print("Hapus Jin hanya dapat diakses oleh akun Bandung Bondowoso.\n")
                 elif pilihan == "ubahjin":
@@ -480,11 +471,6 @@ def login(user:Type[user],candi:Type[candi],bahan:Type[bahan],numbers:Type[numbe
                         laporancandi(candi)
                     else:
                         print("Laporan candi hanya dapat diakses oleh akun Bandung Bondowoso.\n")
-                elif pilihan == "undo":
-                    if role == "bandung_bondowoso":
-                        undo_stack(stack, user, candi)
-                    else:
-                        print("Undo hanya dapat diakses oleh akun Bandung Bondowoso.\n")
                 elif pilihan == "hancurkancandi":
                     if role == "roro_jonggrang":
                         hancurkancandi(candi)

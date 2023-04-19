@@ -69,6 +69,3 @@ def undo(stack:Type[stack],user:Type[user],candi:Type[candi])->None:
         temp_c = [stack.candi[i] for i in range(stack.pos)]
         stack.users,stack.candi = temp_u,temp_c
         print(f"Jin \"{user_data[0]}\" dan candi yang dia bangun berhasil dikembalikan.\n")
-
-    
-

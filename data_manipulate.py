@@ -228,4 +228,3 @@ def update_bahan(list:list, tipe:Type[bahan])->None:
 # ALGORITMA
     for i in range (1,tipe.Neff):
         tipe.detail[i][2] += list[i-1]
-

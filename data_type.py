@@ -4,7 +4,7 @@ from typing import List
 class user:
 # tipe bentukan
 # type user : <Neff : integer {jumlah efektif};
-#              detail : array [1..200] of array [1..length] of string;
+#              detail : array [1..200] of array [1..3] of string;
 #              length : integer  = 3 {jumlah string yang disimpan} >
     def __init__(self, Neff:int, detail:List[list], length:int = 3):
         self.Neff = Neff
@@ -14,7 +14,7 @@ class user:
 class candi:
 # tipe bentukan
 # type candi : <Neff : integer {jumlah efektif};
-#               detail : array [1..200] of array [1..length] of string;
+#               detail : array [1..200] of array [1..5] of string;
 #               length : integer = 5 {jumlah string yang termuat} >
     def __init__(self, Neff:int, detail:List[list], length:int = 5):
         self.Neff = Neff
@@ -24,7 +24,7 @@ class candi:
 class bahan:
 # tipe bentukan
 # type candi : <Neff : integer {jumlah efektif};
-#               detail : array [1..200] of array [1..length] of string;
+#               detail : array [1..200] of array [1..3] of string;
 #               length : integer = 3 {jumlah string yang termuat} >
     def __init__(self, Neff:int, detail:List[list], length:int = 3):
         self.Neff = Neff
@@ -32,7 +32,7 @@ class bahan:
         self.length = 3
         
 
-# tipe bentukan yang menyimpan data log angka hasil RANDOMISASI
+# tipe bentukan yang menyimpan data log angka hasil random generator
 class number_colc:
 # tipe bantukan
 # type number_colc : <Neff : integer {jumlah efektif};

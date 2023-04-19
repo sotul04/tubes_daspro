@@ -5,20 +5,36 @@ from data_type import *
 from time import time
 from undo import *
 
+"""============================================== PROGRAM UTAMA ================================================="""
+
+# KAMUS
+# folder : array of string
+# folder : string
+# u_path, c_path, b_path : string {alamat file ekternal untuk load data}
+# user_data : user
+# candi_data : candi
+# bahan_data : bahan
+# numbers : number_colc
+# stack : stack
+# role : string
+# command : string
+# simpan : char
+
+# ALGORITMA ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 folder = ["kosong"]
-# [F13] melakukan load {memanggil file eksternal}
+# ============================ [F13] melakukan load {memanggil file eksternal} ====================================
 load(folder)
 folder = folder[0]
 u_path = folder+"/user.csv"
 c_path = folder+"/candi.csv"
 b_path = folder+"/bahan_bangunan.csv"
-# memuat semua data dari file eksternal dan disimpan untuk dilakukan permainan game
+# ============== memuat semua data dari file eksternal dan disimpan untuk dilakukan permainan game =================
 user_data = user(read_user(u_path)[0],read_user(u_path)[1])
 candi_data = candi(read_candi(c_path)[0],read_candi(c_path)[1])
 bahan_data = bahan(read_bahan(b_path)[0],read_bahan(b_path)[1])
-# memuat numbers {variabel yang menyimpan angka random selama permainan}
+# =============== memuat numbers {variabel yang menyimpan angka random selama permainan} ============================
 numbers = number_colc(1, [int(time())%11103515245])
-# inisialisasi stack untuk fitur bonus UNDO
+# ========================== inisialisasi stack untuk fitur bonus UNDO ==============================================
 stack = stack(0)
 
 # PERMAINAN

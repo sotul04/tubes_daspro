@@ -3,8 +3,15 @@ from data_type import *
 from undo import tabCandi
 
 def split(s:str,char:str)->list:
+# function split(s : string, char : char) -> array of string
 # mengubah data yang dibaca dari file .csv kemudian mengembalikan sebuah array
 # yang berisi string dari pemisahan yang ditandai dengan char
+
+# KAMUS LOKAL
+# sumofComma, index, i, j : int
+# list_value : array of string
+# temp : string
+# ALGORITMA
     sumofComma = 0
     for i in range (len(s)):
         if s[i] == char:
@@ -25,9 +32,15 @@ def split(s:str,char:str)->list:
     return list_value
 
 def read_user(path:str)->Tuple[int,list]:
-# function list_csv (path : string {alamat file .csv}) -> array of array of string
+# function list_csv (path : string {alamat file .csv}) -> (int, list)
 # mengembalikan sebuah array of array of string dari pemisahan yang ditandai semicolon (;)
 # pada setiap line pada file .csv yang dibaca
+
+# KAMUS LOKAL
+# temp : array[1..200] of array of string
+# index, i : int
+# line : string
+# ALGORITMA
     temp = [0 for i in range(200)]
     with open(path, "r") as file:
         index = 0
@@ -37,9 +50,15 @@ def read_user(path:str)->Tuple[int,list]:
     return index,temp
 
 def read_candi(path:str)->Tuple[int,list]:
-# function list_csv (path : string {alamat file .csv}) -> array of array of string
+# function list_csv (path : string {alamat file .csv}) -> (int, list)
 # mengembalikan sebuah array of array of string dari pemisahan yang ditandai semicolon (;)
 # pada setiap line pada file .csv yang dibaca
+
+# KAMUS LOKAL
+# temp : array of [int, string, int, int, int]
+# index, i : int
+# tent, line : string
+# ALGORITMA
     temp = [0 for i in range(200)]
     with open(path, "r") as file:
         index = 0
@@ -53,9 +72,15 @@ def read_candi(path:str)->Tuple[int,list]:
     return index,temp
 
 def read_bahan(path:str)->Tuple[int,list]:
-# function list_csv (path : string {alamat file .csv}) -> array of array of string
+# function list_csv (path : string {alamat file .csv}) -> (int, list)
 # mengembalikan sebuah array of array of string dari pemisahan yang ditandai semicolon (;)
 # pada setiap line pada file .csv yang dibaca
+
+# KAMUS LOKAL
+# temp : array of [string, string, int]
+# index : int
+# line, tent : string
+# ALGORITMA
     temp = [0 for i in range(4)]
     with open(path, "r") as file:
         index = 0
@@ -69,8 +94,14 @@ def read_bahan(path:str)->Tuple[int,list]:
 
 
 def save_csv(tipe:Any, path:str)->None:
+# procedure save_csv(input tipe : (user, candi, bahan), input path : string)
 # prosedur untuk menyimpan data pada file eksternal saat dipanggil
 # digunakan untuk menyimpan data user, candi, dan bahan bangunan
+
+# KAMUS LOKAL
+# temp, tent : string
+# i, j : int
+# ALGORITMA
     temp = ''
     for i in range(tipe.Neff):
         tent = ''
@@ -84,9 +115,14 @@ def save_csv(tipe:Any, path:str)->None:
     with open(path, "w", encoding="utf-8") as file:
         file.write(temp)
 
-def add_jin(data_jin:list, tipe:Any)->None:
+def add_jin(data_jin:list, tipe:Type[user])->None:
+# procedure add_jin(input data_jin : array of string, input/output tipe : user)
 # fungsi yang akan menambah data tambahan pada variabel yang menyimpan data
 # saat program berjalan
+
+# KAMUS LOKAL
+# i : int
+# ALGORITMA
     for i in range(1,201):
         if tipe.detail[i] == 0:
             tipe.detail[i] = data_jin
@@ -94,7 +130,12 @@ def add_jin(data_jin:list, tipe:Any)->None:
     tipe.Neff += 1
 
 def remove_jin(username:str, tipe:Type[user])->None:
-# fungsi yang akan menghapus data jin yang dicari dari data user
+# procedure remove_jin(input username : string, input/output tipe : user)
+# prosedur yang akan menghapus data jin yang dicari dari data user
+
+# KAMUS LOKAL
+# temp, i : int
+# ALGORITMA
     temp = tipe.Neff
     for i in range (1,tipe.Neff):
         if username == tipe.detail[i][0]:
@@ -105,8 +146,15 @@ def remove_jin(username:str, tipe:Type[user])->None:
         tipe.Neff -= 1
 
 def remove_candi(username:str, tipe:Type[candi], tabcandi:Type[tabCandi])->None:
-# fungsi yang akan menghapus semua candi yang dibangun jin yang 
+# procedure remove_candi(input username : string, input/output tipe : candi, input/ouput tabcandi : tabCandi)
+# prosedur yang akan menghapus semua candi yang dibangun jin yang 
 # pembuatnya bernama username yang diinput
+
+# KAMUS LOKAL
+# count, j, i : int
+# found : bool
+# temp : array of [int, string, int, int, int]
+# ALGORITMA
     count = 0
     for j in range(1,tipe.Neff):
         if username == tipe.detail[j][1]:
@@ -130,7 +178,13 @@ def remove_candi(username:str, tipe:Type[candi], tabcandi:Type[tabCandi])->None:
         tipe.Neff -= 1
 
 def add_candi(username:str, racikan:list, tipe:Type[candi])->None:
+# procedure add_candi(input username : string, input racikan : array of int, input/output tipe : candi)
 # add_candi akan menambah data candi dengan nomor id terkecil yang bisa disisipi
+
+# KAMUS LOKAL
+# min, i, index, idx : int
+# temp : array of [int, string, int, int, int]
+# ALGORITMA
     if tipe.Neff < 101:
         min = 0
         index = tipe.Neff
@@ -149,7 +203,12 @@ def add_candi(username:str, racikan:list, tipe:Type[candi])->None:
             idx += 1
 
 def delete_candi(id_candi:int, tipe:Type[candi])->None:
+# procedure delete_candi(input id : int, input/output tipe : candi)
 # delete_candi akan menghapus data candi dengan id = id_candi dari variabel global yang berisi data candi
+
+# KAMUS LOKAL
+# index, i : int
+# ALGORITMA
     index = tipe.Neff
     for i in range (1,tipe.Neff):
         if id_candi == tipe.detail[i][0]:
@@ -161,7 +220,12 @@ def delete_candi(id_candi:int, tipe:Type[candi])->None:
         tipe.Neff -= 1
             
 def update_bahan(list:list, tipe:Type[bahan])->None:
+# procedure update_bahan(input list : array of integer, input/output tipe : bahan)
 # meng-update bahan saat dipanggil sesuai isi dari list
+
+# KAMUS LOKAL
+# i : int
+# ALGORITMA
     for i in range (1,tipe.Neff):
         tipe.detail[i][2] += list[i-1]
 

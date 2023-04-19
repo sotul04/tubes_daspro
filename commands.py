@@ -7,10 +7,19 @@ from data_type import *
 from typing import List,Type
 from undo import stack, undo
 
+""" ================================ COMMANDs in GAME ======================================= """
+
 #F13
 def load(folder:List[str])->None:
+# procedure load (input/output folder : array of string)
 # Menjalankan load saat program pertama kali dijalankan dan mengubah nilai input/output
 # folder menjadi path data eksternal yang digunakan jika tersedia, jika tidak program keluar
+
+# KAMUS LOKAL
+# parser : ArgumentParser
+# args : parse_args
+# foldr : string
+# ALGORITMA
     parser = ArgumentParser()
     parser.add_argument("nama_folder",nargs="?",type=str,default="")
     args = parser.parse_args()
@@ -30,7 +39,13 @@ def load(folder:List[str])->None:
         exit()
 #F14
 def save(user:Type[user],candi:Type[candi],bahan:Type[bahan])->None:
+# procedure save(input user : user, input candi : candi, input bahan : bahan)
 # Menjalankan prosedur save untuk menyimpan data perubahan selama permainan dijalankan
+
+# KAMUS LOKAL
+# path, folder, test, fold_temp : string
+# repet, i : int
+# ALGORITMA
     path = input("Masukkan nama folder: ")
     folder = "save"
     folder +="/"+path
@@ -57,7 +72,15 @@ def save(user:Type[user],candi:Type[candi],bahan:Type[bahan])->None:
 
 #F08
 def batch_kumpul(user:Type[user],bahan:Type[bahan],numbers:Type[number_colc])->None:
+# procedure batch_kumpul(input user : user, input/output bahan : bahan, input/output numbers : number_colc)
 # melakukan fitur F08 - batchkumpul
+
+# KAMUS LOKAL
+# data : array of string {menyimpan username-username bertipe jin pengumpul}
+# racikan : array of int {menyimpan total bahan yang terkumpul}
+# pasir, batu, air : int {menyimpan data acak bahan-bahan yang terkumpul}
+# i : int
+# ALGORITMA
     data = list_jin("jin_pengumpul", user)
     racikan = [0,0,0]
     if data[0] == 0:
@@ -75,7 +98,17 @@ def batch_kumpul(user:Type[user],bahan:Type[bahan],numbers:Type[number_colc])->N
         update_bahan(racikan, bahan)
 
 def batch_bangun(user:Type[user],candi:Type[candi],bahan:Type[bahan],numbers:Type[number_colc])->None:
+# procedure batch_bangun (input user : user, input/output candi : candi, input/output bahan : bahan, input/output numbers : number_colc)
 # melakukan fitur F08 - batchbangun
+
+# KAMUS LOKAL
+# data : array of string {menyimpan username-username bertipe jin pembangun}
+# bahan_total : array of int {menyimpan total bahan yang diperlukan untuk membangun candi}
+# temp : array of [string, int, int, int] {menyimpan data jin pembangun dan bahan-bahan candi}
+# bahan_cukup : bool
+# kurang : array of int {menyimpan kekurangan bahan jika bahan tidak cukup}
+# i : unt
+# ALGORITMA
     data = list_jin("jin_pembangun", user)
     bahan_total = [0,0,0]
     if data[0] == 0:
@@ -111,7 +144,17 @@ def batch_bangun(user:Type[user],candi:Type[candi],bahan:Type[bahan],numbers:Typ
 
 # F09 - Ambil Laporan Jin
 def laporanjin(user:Type[user],candi:Type[candi],bahan:Type[bahan])->None:
+# procedure laporanjin(input user : user, input candi : candi, input bahan : bahan)
 # melakukan prosedur pengambilan laporan jin
+
+# KAMUS LOKAL
+# total_jin, jin_kumpul, jin_bangun, jlh_pembuat, count, jumlah, index, jumlah_malas : int
+# candi_list : array of [string, int] {menyimpan jumlah pembuat candi dan total candi yang telah dia bangun}
+# jin_terajin, jin_termalas : string
+# list_rajin : array of string {menyimpan username jin-jin terajin}
+# list_malas : array of string {menyimpan username jin-jin termalas}
+# i, j : int
+# ALGORITMA
     total_jin = count_jin(user)[0]
     jin_kumpul = count_jin(user)[1]
     jin_bangun = count_jin(user)[2]
@@ -156,8 +199,6 @@ def laporanjin(user:Type[user],candi:Type[candi],bahan:Type[bahan])->None:
                     index += 1
             urut_abjad(list_malas, count)
             jin_termalas = list_malas[count-1]
-        #if jin_bangun == 0:
-        #    jin_termalas = "-"
     print(f"\n> Total Jin: {total_jin}")
     print(f"> Total Jin Pengumpul: {jin_kumpul}")
     print(f"> Total Jin Pembangun: {jin_bangun}")
@@ -170,7 +211,16 @@ def laporanjin(user:Type[user],candi:Type[candi],bahan:Type[bahan])->None:
 
 # F10 - Ambil Laporan Candi
 def laporancandi(candi:Type[candi])->None:
+# procedure laporancandi(input candi : candi)
 # Melakukan prosedur F10 
+
+# KAMUS LOKAL
+# total_candi, idx, i, j : int
+# total_bahan : array of int
+# candi_detail : array of [string, int] {menyimpan data pembuat dan harga candi}
+# cond : [int, string, int, int, int]
+# id_mahal, id_murah : string
+# ALGORITMA
     total_candi = candi.Neff-1
     total_bahan = [0,0,0]
     candi_detail = [[0,0] for i in range (total_candi)]
@@ -204,7 +254,15 @@ def laporancandi(candi:Type[candi])->None:
 
 # F04 - Hilangkan Jin
 def hapusjin(user:Type[user],candi:Type[candi],stack:Type[stack])->None:
+# procedure hapusjin(input/output user : user, input/output candi : candi, input/output stack : stack)
 # Melakukan prosedur hapusjin //Akses: Bandung Bondowoso 
+
+# KAMUS LOKAL
+# username : string
+# ubah : char
+# cond : arraf of string
+# tabcandi : tabCandi
+# ALGORITMA
     from undo import update_stack, tabCandi
     username = input("Masukkan username jin : ")
     cond = search_log(username, user)
@@ -230,7 +288,15 @@ def hapusjin(user:Type[user],candi:Type[candi],stack:Type[stack])->None:
 
 # F05 - Ubah Tipe Jin
 def ubahjin(user:Type[user])->None:
+# procedure ubahjin(input/ouput user : user)
 # melakukan prosedur ubahjin
+
+# KAMUS LOKAL
+# username, tipe_jin, ubah_ke : string
+# ubah : char
+# idx : int
+# cond : array of string
+# ALGORITMA
     username = input("Masukkan username jin : ")
     cond = search_log(username, user)
     if cond == False:
@@ -253,7 +319,13 @@ def ubahjin(user:Type[user])->None:
 
 # F03 - Summon Jin
 def summonjin(user:Type[user])->None:
+# procedure summonjin(input/output user : user)
 # menjalankan prosedur summon jin
+
+# KAMUS LOKAL
+# jenis : char
+# tipe_jin, username, password : string
+# ALGORITMA
     if user.Neff < 103:
         print("Jenis jin yang dapat dipanggil:")
         print(" (1) Pengumpul - Bertugas mengumpulkan bahan bangunan")
@@ -295,7 +367,14 @@ def summonjin(user:Type[user])->None:
 
 # F06 - Jin Pembangun
 def bangun(username:str,candi:Type[candi],bahan:Type[bahan],numbers:Type[number_colc])->None:
+# procedure bangun(input username : string, input/output candi : candi, input/output bahan : bahan, input/output numbers : number_colc)
 # melakukan prosedur jin pembangun
+
+# KAMUS LOKAL
+# pasir, batu, air, i : int
+# racikan : array of int
+# bisa_dibangun : bool
+# ALGORITMA
     pasir = acak_bangun(numbers)
     batu = acak_bangun(numbers)
     air = acak_bangun(numbers)
@@ -316,7 +395,13 @@ def bangun(username:str,candi:Type[candi],bahan:Type[bahan],numbers:Type[number_
 
 # F07 - Jin Pengumpul
 def kumpul(bahan:Type[bahan],numbers:Type[number_colc])->None:
+# procedure kumpul(input/output bahan : bahan, input/output numbers : number_colc)
 # melakukan prosedur jin pengumpul
+
+# KAMUS LOKAL
+# pasir, batu, air : int
+# racikan : array of int
+# ALGORITMA
     pasir = acak_kumpul(numbers)
     batu = acak_kumpul(numbers)
     air = acak_kumpul(numbers)
@@ -326,7 +411,13 @@ def kumpul(bahan:Type[bahan],numbers:Type[number_colc])->None:
 
 # F11 - Hancurkan Candi
 def hancurkancandi(candi:Type[candi])->None:
+# procedure hancurkancandi(input/output candi : candi)
 # melakukan prosedur hancurkan candi
+
+# KAMUS LOKAL
+# id, pos : int
+# permit : char
+# ALGORITMA
     id = int(input("Masukkan ID candi: "))
     pos = search_position(id, candi)
     if pos == 0:
@@ -343,7 +434,12 @@ def hancurkancandi(candi:Type[candi])->None:
 
 # F12 - Ayam Berkokok
 def ayamberkokok(candi:Type[candi])->None:
+# procedure ayamberkokok(input candi : candi)
 # melakukan prosedur Ayam Berkokok
+
+# KAMUS LOKAL
+# jumlah_candi : int
+# ALGORITMA
     print("Kukuruyuk.. Kukuruyuk..\n")
     jumlah_candi = candi.Neff-1
     print(f"Jumlah Candi: {jumlah_candi}\n")
@@ -355,12 +451,20 @@ def ayamberkokok(candi:Type[candi])->None:
 
 # F15 - Help
 def help()->None:
+# procedure help()
+# menampilkan command yang tersedia sebelum login
+# KAMUS LOKAL
+# ALGORITMA
     print("=========== HELP ===========")
     print("1. login\n   Untuk masuk menggunakan akun")
     print("2. save\n   Untuk menyimpan perubahan data selama permainan")
     print("3. exit\n   Untuk keluar dari program dan kembali ke terminal\n")
 
 def help_bandung()->None:
+# procedure help_bandung()
+# menampilkan command yang tersedia saat login sebagai Bandung Bondowoso
+# KAMUS LOKAL
+# ALGORITMA
     print("=========== HELP ===========")
     print("1.  logout\n    Untuk keluar dari akun yang digunakan sekarang")
     print("2.  summonjin\n    Untuk memanggil jin")
@@ -375,6 +479,10 @@ def help_bandung()->None:
     print("11. exit\n    Untuk keluar dari program dan kembali ke terminal\n")
 
 def help_roro()->None:
+# procedure help_roro()
+# menampilkan command yang tersedia saat login sebagai Roro Jonggrang
+# KAMUS LOKAL
+# ALGORITMA
     print("=========== HELP ===========")
     print("1. logout\n   Untuk keluar dari akun yang digunakan sekarang")
     print("2. hancurkancandi\n   Untuk menghancurkan candi yang tersedia")
@@ -383,6 +491,10 @@ def help_roro()->None:
     print("5. exit\n   Untuk keluar dari program dan kembali ke terminal\n")
 
 def help_jinbangun()->None:
+# procedure help_jinbangun()
+# menampilkan command yang tersedia saat login sebagai Jin Pembangun
+# KAMUS LOKAL
+# ALGORITMA
     print("=========== HELP ===========")
     print("1. logout\n   Untuk keluar dari akun yang digunakan sekarang")
     print("2. bangun\n   Untuk membangun candi")
@@ -390,6 +502,10 @@ def help_jinbangun()->None:
     print("4. exit\n   Untuk keluar dari program dan kembali ke terminal\n")
 
 def help_jinkumpul()->None:
+# procedure help_jinkumpul()
+# menampilkan command yang tersedia saat login sebagai Jin Pengumpul
+# KAMUS LOKAL
+# ALGORITMA
     print("=========== HELP ===========")
     print("1. logout\n   Untuk keluar dari akun yang digunakan sekarang")
     print("2. kumpul\n   Untuk mengumpulkan bahan-bahan")
@@ -399,7 +515,14 @@ def help_jinkumpul()->None:
 # LOGIN HARUS DIBUAT PALING AKHIR, LANJUTKAN CODE DI ATAS BAGIAN INI
 # F01 - Login
 def login(user:Type[user],candi:Type[candi],bahan:Type[bahan],numbers:Type[number_colc],role:str,stack:Type[stack])->None:
+# procedure login(input user : user, input candi : candi, input : bahan, input numbers : number_colc, input role : string, input stack : stack)
 # melakukan prosedur login
+
+# KAMUS LOKAL
+# username, password, role, pilihan : string
+# simpan : char
+# cond : array of string
+# ALGORITMA
     username = input("Username: ")
     password = input("Password: ")
     cond = search_log(username, user)

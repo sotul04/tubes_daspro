@@ -2,6 +2,8 @@ from typing import Type, List
 from function import search_log
 from data_type import user, candi
 
+""" ====================================== UNDO PACK ============================================ """
+
 class tabCandi:
 # tipe bentukan
 # type tabCandi : < Neff : integer;
@@ -21,7 +23,14 @@ class stack:
         self.candi = candi
 
 def update_stack(stack:Type[stack],user_dat:List[str],tabcandi:Type[tabCandi])->None:
+# procedure update_stack(input/output stack : stack, input user_dat : array of string, input tabcandi : tabCandi)
 # fungsi ini menambah data pada stack setiap kali ada jin pembangun yang dihapus
+
+# KAMUS LOKAL
+# i : int
+# temp_u : array of string
+# temp_c : array of tabCandi
+# ALGORITMA
     stack.pos += 1
     temp_u = [0 for i in range(stack.pos)]
     temp_c = [0 for i in range(stack.pos)]
@@ -34,7 +43,16 @@ def update_stack(stack:Type[stack],user_dat:List[str],tabcandi:Type[tabCandi])->
     stack.candi = temp_c
 
 def undo(stack:Type[stack],user:Type[user],candi:Type[candi])->None:
+# procedure undo(input/output stack : stack, input/output user : user, input/output candi : candi)
 # mengembalikan data candi dan jin pembangun yang sebelumnya telah dihapus
+
+# KAMUS LOKAL
+# user_data = array of string
+# i : int
+# dcandi : array of string
+# temp_u : array of array of string
+# temp_c : array of array of [int, string, int, int, int]
+# ALGORITMA
     from data_manipulate import add_jin,add_candi
     if stack.pos == 0:
         print("Tidak ada jin dan candi yang bisa dikembalikan.\n")

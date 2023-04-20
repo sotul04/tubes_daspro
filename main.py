@@ -44,13 +44,13 @@ while True:
     if command == "login":
         login(user_data, candi_data, bahan_data, numbers, role,stack)
     elif command == "save":
-        save(user_data, candi_data, bahan_data)
+        save(user_data, candi_data, bahan_data, stack)
     elif command == "exit":
         simpan = input("Apakah Anda mau melakukan penyimpanan file yang sudah diubah? (y/n) ")
         while simpan != "y" and simpan != "Y" and simpan != "n" and simpan != "N":
             simpan = input("Apakah Anda mau melakukan penyimpanan file yang sudah diubah? (y/n) ")
         if simpan == "y" or simpan == "Y":
-            save(user_data, candi_data, bahan_data)
+            save(user_data, candi_data, bahan_data, stack)
         exit()
     elif command == "help":
         help()

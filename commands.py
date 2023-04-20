@@ -38,7 +38,7 @@ def load(folder:List[str])->None:
         print(f"\nFolder \"{foldr}\" tidak ditemukan.")
         exit()
 #F14
-def save(user:Type[user],candi:Type[candi],bahan:Type[bahan])->None:
+def save(user:Type[user],candi:Type[candi],bahan:Type[bahan],stack:Type[stack])->None:
 # procedure save(input user : user, input candi : candi, input bahan : bahan)
 # Menjalankan prosedur save untuk menyimpan data perubahan selama permainan dijalankan
 
@@ -53,6 +53,7 @@ def save(user:Type[user],candi:Type[candi],bahan:Type[bahan])->None:
     repet = path_counter(folder)
     test = split(folder,"/")
     fold_temp = ''
+    stack.pos, stack.users, stack.candi = 0, [], [] # mengosongkan stack
     for i in range(repet):
         if i > 0:
             fold_temp += "/"
@@ -281,8 +282,7 @@ def hapusjin(user:Type[user],candi:Type[candi],stack:Type[stack])->None:
                 remove_jin(username, user)
                 tabcandi = tabCandi(0)
                 remove_candi(username, candi, tabcandi)
-                if cond[2] == "jin_pembangun":
-                    update_stack(stack, cond, tabcandi)
+                update_stack(stack, cond, tabcandi)
             else:
                 print("\nJin batal dihapus dari alam gaib.\n")
 
@@ -534,7 +534,7 @@ def login(user:Type[user],candi:Type[candi],bahan:Type[bahan],numbers:Type[numbe
             while True:
                 pilihan = input(">>> ")
                 if pilihan == "save":
-                    save(user, candi, bahan)
+                    save(user, candi, bahan, stack)
                 elif pilihan == "logout":
                     break
                 elif pilihan == "help":

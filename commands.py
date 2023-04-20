@@ -237,7 +237,7 @@ def laporancandi(candi:Type[candi])->None:
         for i in range (1,total_candi):
             min = candi_detail[i][1]
             idx = i-1
-            while idx >= 1 and min < candi_detail[idx][1]:
+            while idx >= 0 and min < candi_detail[idx][1]:
                 candi_detail[idx+1],candi_detail[idx] = candi_detail[idx],candi_detail[idx+1]
                 idx -= 1
         if total_candi == 1:
@@ -551,7 +551,7 @@ def login(user:Type[user],candi:Type[candi],bahan:Type[bahan],numbers:Type[numbe
                     while simpan != "y" and simpan != "Y" and simpan != "n" and simpan != "N":
                         simpan = input("Apakah Anda mau melakukan penyimpanan file yang sudah diubah? (y/n) ")
                     if simpan == "y" or simpan == "Y":
-                        save(user, candi, bahan)
+                        save(user, candi, bahan, stack)
                     exit()
                 elif pilihan == "login":
                     print("Login gagal!")

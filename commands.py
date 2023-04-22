@@ -28,12 +28,12 @@ def load(folder:List[str])->None:
         print("\nTidak ada nama folder yang diberikan!\n")
         print("Usage: "+"\x1B[3m" + "python main.py" + "\x1B[0m" + " <nama_folder>")
         exit()
-    elif os.path.isdir(foldr):
+    elif os.path.isdir("save/"+foldr):
         print("Loading...")
         sleep(2)
         print("\nSelamat datang di program \"Manajerial Candi\"")
         print("Masukkan command \"help\" untuk daftar command yang dapat kamu panggil.")
-        folder[0] = foldr
+        folder[0] = "save/"+foldr
     else:
         print(f"\nFolder \"{foldr}\" tidak ditemukan.")
         exit()
@@ -441,8 +441,10 @@ def ayamberkokok(candi:Type[candi])->None:
 # jumlah_candi : int
 # ALGORITMA
     print("Kukuruyuk.. Kukuruyuk..\n")
+    sleep(1)
     jumlah_candi = candi.Neff-1
     print(f"Jumlah Candi: {jumlah_candi}\n")
+    sleep(1)
     if jumlah_candi == 100:
         print("Yah, Bandung Bondowoso memenangkan permainan!\n")
     else:

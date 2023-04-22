@@ -61,11 +61,12 @@ def undo(stack:Type[stack],user:Type[user],candi:Type[candi])->None:
         user_data = stack.users[stack.pos]
         if search_log(user_data[0], user) == False:
             add_jin(user_data, user)
+        count = [0]
         for i in range (stack.candi[stack.pos].Neff):
             dcandi = stack.candi[stack.pos].detail[i]
-            add_candi(dcandi[1], [dcandi[2],dcandi[3],dcandi[4]], candi)
+            add_candi(dcandi[1], [dcandi[2],dcandi[3],dcandi[4]], candi, count)
         # menghapus data terakhir setiap data
         temp_u = [stack.users[i] for i in range(stack.pos)]
         temp_c = [stack.candi[i] for i in range(stack.pos)]
         stack.users,stack.candi = temp_u,temp_c
-        print(f"Jin \"{user_data[0]}\" dan candi yang dia bangun berhasil dikembalikan.\n")
+        print(f"Jin \"{user_data[0]}\" dan {count[0]} candi yang dia bangun berhasil dikembalikan.\n")

@@ -177,7 +177,7 @@ def remove_candi(username:str, tipe:Type[candi], tabcandi:Type[tabCandi])->None:
                     tipe.detail[i] = tipe.detail[i+1]
         tipe.Neff -= 1
 
-def add_candi(username:str, racikan:list, tipe:Type[candi])->None:
+def add_candi(username:str, racikan:list, tipe:Type[candi], count:List[int] = [0])->None:
 # procedure add_candi(input username : string, input racikan : array of int, input/output tipe : candi)
 # add_candi akan menambah data candi dengan nomor id terkecil yang bisa disisipi
 
@@ -186,6 +186,7 @@ def add_candi(username:str, racikan:list, tipe:Type[candi])->None:
 # temp : array of [int, string, int, int, int]
 # ALGORITMA
     if tipe.Neff < 101:
+        count[0] += 1
         min = 0
         index = tipe.Neff
         for i in range(1,tipe.Neff):

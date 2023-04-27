@@ -9,6 +9,7 @@ def search_log(input:str,user:Type[user])->Any:
 # KAMUS LOKAL
 # found : bool
 # found : array of string
+# i : int
 # ALGORITMA
     found = False
     for i in range(1,user.Neff):

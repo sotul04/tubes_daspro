@@ -57,7 +57,8 @@ def read_candi(path:str)->Tuple[int,list]:
 # KAMUS LOKAL
 # temp : array of [int, string, int, int, int]
 # index, i : int
-# tent, line : string
+# tent : array
+# line : string
 # ALGORITMA
     temp = [0 for i in range(200)]
     with open(path, "r") as file:
@@ -79,7 +80,8 @@ def read_bahan(path:str)->Tuple[int,list]:
 # KAMUS LOKAL
 # temp : array of [string, string, int]
 # index : int
-# line, tent : string
+# line : string
+# tent : array
 # ALGORITMA
     temp = [0 for i in range(4)]
     with open(path, "r") as file:

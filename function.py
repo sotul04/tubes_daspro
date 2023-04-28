@@ -24,7 +24,7 @@ def search_position(input:str,user:Type[user])->int:
 # return 0 jika tidak ditemukan
 
 # KAMUS LOKAL
-# found : int
+# found, i : int
 # ALGORITMA
     found = 0
     for i in range(1,user.Neff):
@@ -38,7 +38,7 @@ def path_counter(path:str)->int:
 # fungsi yang digunakan untuk menghitung jumlah folder di dalam sebuah alamat path
 
 # KAMUS LOKAL
-# count : int
+# count, i : int
 # ALGORITMA
     count = 1
     for i in range(len(path)):
@@ -110,7 +110,7 @@ def acak_kumpul(number:Type[number_colc])->int:
 
 def list_jin(role:str,user:Type[user])->Tuple[int,list]:
 # function list_jin(role : string, user : user) -> (int, list)
-# mengembalikan list yang berisi username jin bertipe role
+# mengembalikan banyak jin dan list yang berisi username jin bertipe role
 
 # KAMUS LOKAL
 # count, i, index : int

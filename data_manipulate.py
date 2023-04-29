@@ -180,7 +180,7 @@ def remove_candi(username:str, tipe:Type[candi], tabcandi:Type[tabCandi])->None:
         tipe.Neff -= 1
 
 def add_candi(username:str, racikan:list, tipe:Type[candi], count:List[int] = [0])->None:
-# procedure add_candi(input username : string, input racikan : array of int, input/output tipe : candi)
+# procedure add_candi(input username : string, input racikan : array of int, input/output tipe : candi, input/output count : array of integer)
 # add_candi akan menambah data candi dengan nomor id terkecil yang bisa disisipi
 
 # KAMUS LOKAL

@@ -206,8 +206,8 @@ def laporanjin(user:Type[user],candi:Type[candi],bahan:Type[bahan])->None:
     print(f"> Jin Terajin: {jin_terajin}")
     print(f"> Jin Termalas: {jin_termalas}")
     print(f"> Jumlah Pasir: {bahan.detail[1][2]} unit")
-    print(f"> Jumlah Pasir: {bahan.detail[2][2]} unit")
-    print(f"> Jumlah Pasir: {bahan.detail[3][2]} unit\n")
+    print(f"> Jumlah Batu: {bahan.detail[2][2]} unit")
+    print(f"> Jumlah Air: {bahan.detail[3][2]} unit\n")
 
 
 # F10 - Ambil Laporan Candi

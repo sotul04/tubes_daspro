@@ -47,7 +47,7 @@ def undo(stack:Type[stack],user:Type[user],candi:Type[candi])->None:
 # mengembalikan data candi dan jin pembangun yang sebelumnya telah dihapus
 
 # KAMUS LOKAL
-# user_data = array of string
+# user_data : array of string
 # i : int
 # dcandi : array of string
 # temp_u : array of array of string

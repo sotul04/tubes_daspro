@@ -30,7 +30,7 @@ def load(folder:List[str])->None:
         exit()
     elif os.path.isdir("save/"+foldr):
         print("Loading...")
-        sleep(2)
+        sleep(1.3)
         print("\nSelamat datang di program \"Manajerial Candi\"")
         print("Masukkan command \"help\" untuk daftar command yang dapat kamu panggil.")
         folder[0] = "save/"+foldr
@@ -517,11 +517,11 @@ def help_jinkumpul()->None:
 # LOGIN HARUS DIBUAT PALING AKHIR, LANJUTKAN CODE DI ATAS BAGIAN INI
 # F01 - Login
 def login(user:Type[user],candi:Type[candi],bahan:Type[bahan],numbers:Type[number_colc],role:str,stack:Type[stack])->None:
-# procedure login(input user : user, input candi : candi, input : bahan, input numbers : number_colc, input role : string, input stack : stack)
+# procedure login(input/output user : user, input/output candi : candi, input/output bahan : bahan, input/output numbers : number_colc, input role : string, input/output stack : stack)
 # melakukan prosedur login
 
 # KAMUS LOKAL
-# username, password, role, pilihan : string
+# username, password, pilihan : string
 # simpan : char
 # cond : array of string
 # ALGORITMA

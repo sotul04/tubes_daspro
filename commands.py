@@ -39,7 +39,7 @@ def load(folder:List[str])->None:
         exit()
 #F14
 def save(user:Type[user],candi:Type[candi],bahan:Type[bahan],stack:Type[stack])->None:
-# procedure save(input user : user, input candi : candi, input bahan : bahan)
+# procedure save(input user : user, input candi : candi, input bahan : bahan, input/output stack : stack)
 # Menjalankan prosedur save untuk menyimpan data perubahan selama permainan dijalankan
 
 # KAMUS LOKAL

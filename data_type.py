@@ -24,7 +24,7 @@ class candi:
 class bahan:
 # tipe bentukan
 # type candi : <Neff : integer {jumlah efektif};
-#               detail : array [1..200] of array [1..3] of string;
+#               detail : array [1..4] of array [1..3] of string;
 #               length : integer = 3 {jumlah string yang termuat} >
     def __init__(self, Neff:int, detail:List[list], length:int = 3):
         self.Neff = Neff
